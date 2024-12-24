@@ -24,7 +24,7 @@
     <ClCompile Include="OpenGL_CPP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common\shader.h">
+    <ClCompile Include="common\Shader.h">
       <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp">
@@ -48,25 +48,39 @@
     <ClCompile Include="dependencies\imgui\imgui.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="common\shader.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
     <ClCompile Include="common\Camera.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="common\Shader.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\OpenGLUtils.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\ImGuiManager.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\WindowManager.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Renderer.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SimpleVertexShader.vertexshader">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="SimpleFragmentShader.fragmentshader">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="SimpleVertexShader.vertexshader" />
+    <None Include="dependencies\imgui\imgui.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\objloader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dependencies\include\imgui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,5 +129,28 @@
     <ClInclude Include="common\Camera.h">
       <Filter>Source Files\common</Filter>
     </ClInclude>
+    <ClInclude Include="common\OpenGLUtils.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ImGuiManager.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\WindowManager.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Renderer.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common\IndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\iceland_heightmap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

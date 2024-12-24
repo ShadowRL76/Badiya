@@ -136,7 +136,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="common\Camera.cpp" />
-    <ClCompile Include="common\shader.cpp" />
+    <ClCompile Include="common\IndexBuffer.cpp" />
+    <ClCompile Include="common\Shader.cpp" />
+    <ClCompile Include="common\VertexBuffer.cpp" />
     <ClCompile Include="dependencies\imgui\imgui.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_demo.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_draw.cpp" />
@@ -144,16 +146,22 @@
     <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_tables.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="common\OpenGLUtils.cpp" />
+    <ClCompile Include="common\ImGuiManager.cpp" />
     <ClCompile Include="OpenGL_CPP.cpp" />
-    <ClCompile Include="common\shader.h" />
+    <ClCompile Include="common\Shader.h" />
+    <ClCompile Include="common\Renderer.cpp" />
+    <ClCompile Include="common\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dependencies\imgui\imgui.ini" />
     <None Include="SimpleFragmentShader.fragmentshader" />
     <None Include="SimpleVertexShader.vertexshader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\Camera.h" />
-    <ClInclude Include="common\objloader.h" />
+    <ClInclude Include="common\IndexBuffer.h" />
+    <ClInclude Include="common\VertexBuffer.h" />
     <ClInclude Include="dependencies\imgui\imconfig.h" />
     <ClInclude Include="dependencies\imgui\imgui.h" />
     <ClInclude Include="dependencies\imgui\imgui_impl_glfw.h" />
@@ -169,6 +177,13 @@
     <ClInclude Include="dependencies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="dependencies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="dependencies\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="common\OpenGLUtils.h" />
+    <ClInclude Include="common\ImGuiManager.h" />
+    <ClInclude Include="common\Renderer.h" />
+    <ClInclude Include="common\WindowManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\iceland_heightmap.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

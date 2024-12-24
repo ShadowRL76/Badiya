@@ -9,71 +9,32 @@
 #include "dependencies/imgui/imgui_impl_glfw.h"
 #include "dependencies/imgui/imgui_impl_opengl3.h"
 
-#include "common/shader.h"
+#include "common/Shader.h"
 #include "common/Camera.h"
+#include "common/OpenGLUtils.h"
+#include "common/WindowManager.h"
+#include "common/ImGuiManager.h"
+#include "common/VertexBuffer.h"
+#include "common/IndexBuffer.h"
 
-
-//This is something you can’t change, it’s built in your graphics card. So (-1,-1) is the bottom left corner of your screen. 
-// (1,-1) is the bottom right, and (0,1) is the middle top. So this triangle should take most of the screen.
-
-// If w == 1, then the vector (x,y,z,1) is a position in space.
-// If w == 0, then the vector(x, y, z, 0) is a direction.
 
 int main()
 {
+    OpenGLInit init;
+    WindowManager windowManager(&init); 
+    ImGuiManager imguiManager;
+    auto window = windowManager.CreateWindow(3840, 2160, "Graphics Engine", NULL, NULL);
 
-    // Initialise GLFW
-    glewExperimental = true; // Needed for core profile
-    if (!glfwInit())
-    {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
-    }
+    imguiManager.Init(window.get()); 
+    Camera cam = camera(window.get());  
 
-    glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  // OpenGL 3.3
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Don't want the old OpenGL 
-
-
-    // Open a window and create its OpenGL context
-    std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> window(
-        glfwCreateWindow(3840, 2160, "Graphics Engine", NULL, NULL),
-        glfwDestroyWindow
-    );
-
-    if (window == NULL)
-    {
-        std::cerr << "Failed to open GLFW window.\n";
-        glfwTerminate();
-        return -1;
-    }
-
-    glfwMakeContextCurrent(window.get()); // Initialize GLEW
-
-    glewExperimental = true; // Needed for core profile
-    if (glewInit() != GLEW_OK)
-    {
-        std::cerr << "Failed to initialize GLEW\n";
-        return -1;
-    }
-
-    ImGui::CreateContext(); 
-    ImGuiIO& io = ImGui::GetIO(); (void)io; 
-    ImGui::GetIO().FontGlobalScale = 3.0f; 
-    ImGui_ImplGlfw_InitForOpenGL(window.get(), true); 
-    ImGui_ImplOpenGL3_Init("#version 330");
-    Camera cam = camera(window.get()); 
-
-
-    static const GLfloat gVertexBufferDataSquareOne[] = {
-        -1.0f,-1.0f,-1.0f, // triangle 1 : begin
+    static const float s_VertexBufferDataCube[] = {
+        -1.0f,-1.0f,-1.0f, 
         -1.0f,-1.0f, 1.0f,
-        -1.0f, 1.0f, 1.0f, // triangle 1 : end
-        1.0f, 1.0f,-1.0f, // triangle 2 : begin
+        -1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f,-1.0f, 
         -1.0f,-1.0f,-1.0f,
-        -1.0f, 1.0f,-1.0f, // triangle 2 : end
+        -1.0f, 1.0f,-1.0f, 
         1.0f,-1.0f, 1.0f,
         -1.0f,-1.0f,-1.0f,
         1.0f,-1.0f,-1.0f,
@@ -106,51 +67,23 @@ int main()
         1.0f,-1.0f, 1.0f
     };
 
-    static const GLfloat gVertexBufferDataTriangle[] = {
-       -1.0f, -1.0f, 0.0f,
-       1.0f, -1.0f, 0.0f,
-       0.0f,  1.0f, 0.0f,
-    };
-    static const GLfloat gVertexBufferDataSquareTwo[] = {
-        -1.0f, -1.0f, -1.0f, // triangle 1 : begin
-            -1.0f, -1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f, // triangle 1 : end
-            1.0f, 1.0f, -1.0f, // triangle 2 : begin
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f, // triangle 2 : end
-            1.0f, -1.0f, 1.0f,
-            -1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, 1.0f,
-            -1.0f, -1.0f, 1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, 1.0f,
-            -1.0f, -1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, -1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f, 1.0f, 1.0f,
-            -1.0f, 1.0f, 1.0f,
-            1.0f, -1.0f, 1.0f
+    static const unsigned int s_IndexBufferDataCube[] = { 
+    0, 1, 2,   // Triangle 1
+    3, 4, 5,   // Triangle 2
+    6, 7, 8,   // Triangle 3
+    9, 10, 11, // Triangle 4
+    12, 13, 14,// Triangle 5
+    15, 16, 17,// Triangle 6
+    18, 19, 20,// Triangle 7
+    21, 22, 23,// Triangle 8
+    24, 25, 26,// Triangle 9
+    27, 28, 29,// Triangle 10
+    30, 31, 32,// Triangle 11
+    33, 34, 35 // Triangle 12
     };
 
-    static const GLfloat gColorBufferData[] = {
+
+    static const float s_ColorBufferData[] = {
     0.583f,  0.771f,  0.014f,
     0.609f,  0.115f,  0.436f,
     0.327f,  0.483f,  0.844f,
@@ -189,56 +122,35 @@ int main()
     0.982f,  0.099f,  0.879f
     };
 
-    GLuint VertexArrayID{};  
-    glGenVertexArrays(1, &VertexArrayID);  
-    glBindVertexArray(VertexArrayID);  
+    unsigned int VertexArrayID{};
+    glGenVertexArrays(1, &VertexArrayID);   
+    glBindVertexArray(VertexArrayID);   
 
-    GLuint vertexBufferSquareOne{};
-    glGenBuffers(1, &vertexBufferSquareOne);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferSquareOne);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gVertexBufferDataSquareOne), gVertexBufferDataSquareOne, GL_STATIC_DRAW);
+    VertexBuffer vertexBuffer(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube));
+    VertexBuffer vertexBufferTriangle(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube)); 
+    VertexBuffer vertexBufferSquareTwo(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube));
 
-    GLuint vertexBufferTriangle{};
-    glGenBuffers(1, &vertexBufferTriangle);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferTriangle);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gVertexBufferDataTriangle), gVertexBufferDataTriangle, GL_STATIC_DRAW);
+    IndexBuffer indexBufferSquareOne(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube)); 
+    IndexBuffer indexBufferTriangle(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube)); 
+    IndexBuffer indexBufferSquareTwo(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube)); 
 
-    GLuint vertexBufferSquareTwo{};
-    glGenBuffers(1, &vertexBufferSquareTwo);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferSquareTwo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gVertexBufferDataSquareTwo), gVertexBufferDataSquareTwo, GL_STATIC_DRAW);
-
-
-    GLuint colorbuffer{};
+    
+    uint32_t colorbuffer{}; 
     glGenBuffers(1, &colorbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gColorBufferData), gColorBufferData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(s_ColorBufferData), s_ColorBufferData, GL_STATIC_DRAW); 
 
-    GLuint programID = LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
-
-    glfwSetInputMode(window.get(), GLFW_STICKY_KEYS, GL_TRUE);
-
-
+    uint32_t programID = LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader"); 
 
     glm::vec3 translateSquareOne(-3.0f, 0.0f, 0.0f); 
     glm::vec3 translateSquareTwo(6.0f, 0.0f, 0.0f);
-    glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f);
-
-
+    glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f); 
 
     do {
 
         // Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
-
-        ImGui_ImplOpenGL3_NewFrame(); 
-        ImGui_ImplGlfw_NewFrame(); 
-        ImGui::NewFrame(); 
-
-
-
-
 
         // Enable depth test
         glEnable(GL_DEPTH_TEST);
@@ -248,12 +160,13 @@ int main()
 
         glfwGetFramebufferSize(window.get(), &width, &height); 
 
-        GLuint MatrixIDS = glGetUniformLocation(programID, "MVP"); 
-
+        uint32_t MatrixIDS = glGetUniformLocation(programID, "MVP");  
 
         cam.Controls(window.get()); 
         cam.GetProjectionMatrix();
         cam.GetViewMatrix();
+        imguiManager.RenderUI(cam, window.get(), translateSquareOne, translateSquareTwo, translateTriangle);
+
 
         // creates a model matrix. This matrix is used to position, 
         // scale, and rotate objects in the world. By default, it's the identity matrix (1.0f), 
@@ -271,137 +184,38 @@ int main()
         ModelSquareTwo = glm::translate(ModelSquareTwo, translateSquareTwo);
         glm::mat4 MVPThree = cam.GetProjectionMatrix() * cam.GetViewMatrix() * ModelSquareTwo; // Combine them into the MVP matrix   
 
-        // Send the MVP matrix to the shader
-        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPOne));
+        glEnableVertexAttribArray(0); // position  
+        glEnableVertexAttribArray(1); // color  
 
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferSquareOne);
-        glVertexAttribPointer(
-            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-            3,                  // size 
-            GL_FLOAT,           // type 
-            GL_FALSE,           // normalized?  
-            0,                  // stride 
-            (void*)0            // array buffer offset 
-        );
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0); 
+        vertexBuffer.Bind(); 
+        indexBufferSquareOne.Bind(); 
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);  
+        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);  
+          
 
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-        glVertexAttribPointer(
-            1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-            3,                                // size
-            GL_FLOAT,                         // type
-            GL_FALSE,                         // normalized?
-            0,                                // stride
-            (void*)0                          // array buffer offset
-        );
+        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPOne));  
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);  
 
-        glDrawArrays(GL_TRIANGLES, 0, 12 * 3);  // 12*3 indices starting at 0 -> 12 triangles -> 6 squares 
+        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPTwo)); 
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0); 
 
+        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPThree));  
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0); 
 
-        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPTwo));
-
-        glEnableVertexAttribArray(2);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferTriangle);
-        glVertexAttribPointer(
-            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-            3,                  // size 
-            GL_FLOAT,           // type  
-            GL_FALSE,           // normalized?   
-            0,                  // stride 
-            (void*)0            // array buffer offset 
-        );
-
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-        glVertexAttribPointer(
-            1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-            3,                                // size
-            GL_FLOAT,                         // type
-            GL_FALSE,                         // normalized?
-            0,                                // stride
-            (void*)0                          // array buffer offset
-        );
-
-        glDrawArrays(GL_TRIANGLES, 0, 3);  // 12*3 indices starting at 0 -> 12 triangles -> 6 squares  
-
-        glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, glm::value_ptr(MVPThree));
-
-        glEnableVertexAttribArray(3);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferSquareTwo);
-        glVertexAttribPointer(
-            0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-            3,                  // size 
-            GL_FLOAT,           // type  
-            GL_FALSE,           // normalized?   
-            0,                  // stride 
-            (void*)0            // array buffer offset 
-        );
-
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-        glVertexAttribPointer(
-            1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-            3,                                // size
-            GL_FLOAT,                         // type
-            GL_FALSE,                         // normalized?
-            0,                                // stride
-            (void*)0                          // array buffer offset
-        );
-
-        glDrawArrays(GL_TRIANGLES, 0, 12 * 3);  // 12*3 indices starting at 0 -> 12 triangles -> 6 squares  
-
-
-        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(0); 
         glDisableVertexAttribArray(1);
-
-        ImGui::Begin("My Window");
-        ImGui::Text("Hello, world!");
-        ImGui::SliderFloat3("Translate Square One", &translateSquareOne.x, -20.0f, 20.0f);
-        ImGui::SliderFloat3("Translate Square Two", &translateSquareTwo.x, -20.0f, 20.0f);
-        ImGui::SliderFloat3("Translate Triangle", &translateTriangle.x, -20.0f, 20.0f);
-        if(ImGui::Button("Reset"))
-		{
-			translateSquareOne = glm::vec3(-3.0f, 0.0f, 0.0f); 
-			translateSquareTwo = glm::vec3(6.0f, 0.0f, 0.0f); 
-			translateTriangle = glm::vec3(2.0f, 0.0f, 0.0f);
-            cam.CameraReset(window.get()); 
-		}
-        if (ImGui::Button("Add Square"))
-        {
-            //Add a square Soon! Clean up code for this and add a draw new objects function!
-        }
-		if (ImGui::Button("Close Me"))
-		{
-			glfwSetWindowShouldClose(window.get(), true);
-		}  
-
-
-        ImGui::Text("FPS %f", ImGui::GetIO().Framerate);
-        ImGui::Text("Application average %.3f", 1000.0f / ImGui::GetIO().Framerate);
-        ImGui::End();
-
-
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // Swap buffers 
         glfwSwapBuffers(window.get());
         glfwPollEvents();
 
         //Enabled so gpu cant render inside of the cubes
-        //glEnable(GL_CULL_FACE);
+        //glEnable(GL_CULL_FACE); 
         //glfwSwapInterval(0); // Disable V-Sync
-
-
 
     } // Check if the ESC key was pressed or the window was closed
     while (glfwGetKey(window.get(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
         glfwWindowShouldClose(window.get()) == 0);
-
-    ImGui_ImplOpenGL3_Shutdown(); 
-    ImGui_ImplGlfw_Shutdown(); 
-    ImGui::DestroyContext(); 
 }
 
