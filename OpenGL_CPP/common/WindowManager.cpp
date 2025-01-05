@@ -1,6 +1,7 @@
 #include "WindowManager.h"
 
-std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> WindowManager::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>
+WindowManager::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
 	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> window(
 		glfwCreateWindow(width, height, title, monitor, share),
@@ -13,11 +14,10 @@ std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> WindowManager::CreateW
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	glfwMakeContextCurrent(window.get()); // Initialize GLEW 
+	glfwMakeContextCurrent(window.get()); // Initialize GLEW
 
-	p_init->GlewInit(); 
+	p_init->GlewInit();
 
 	glfwSetInputMode(window.get(), GLFW_STICKY_KEYS, GL_TRUE);
 	return window;
 }
-
