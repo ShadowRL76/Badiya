@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpectralForge-Viewer", "SpectralForge-Viewer\SpectralForge-Viewer.vcxproj", "{95FE188B-818D-A254-2AAC-B64F161AB3FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{15A0C35D-0158-05AB-6A5F-DE065636A09B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpectralForge-Core", "SpectralForge-Core\SpectralForge-Core.vcxproj", "{8CC1437F-78A5-04D5-E105-FF27CD08EF56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Dist|x64 = Dist|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Debug|x64.ActiveCfg = Debug|x64
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Debug|x64.Build.0 = Debug|x64
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Dist|x64.ActiveCfg = Dist|x64
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Dist|x64.Build.0 = Dist|x64
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Release|x64.ActiveCfg = Release|x64
+		{95FE188B-818D-A254-2AAC-B64F161AB3FA}.Release|x64.Build.0 = Release|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Debug|x64.ActiveCfg = Debug|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Debug|x64.Build.0 = Debug|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Dist|x64.ActiveCfg = Dist|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Dist|x64.Build.0 = Dist|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Release|x64.ActiveCfg = Release|x64
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CC1437F-78A5-04D5-E105-FF27CD08EF56} = {15A0C35D-0158-05AB-6A5F-DE065636A09B}
+	EndGlobalSection
+EndGlobal

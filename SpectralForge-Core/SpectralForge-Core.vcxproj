@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8CC1437F-78A5-04D5-E105-FF27CD08EF56}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SpectralForge-Core</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\Binaries\windows-x86_64\Debug\SpectralForge-Core\</OutDir>
+    <IntDir>..\Binaries\Intermediates\windows-x86_64\Debug\SpectralForge-Core\</IntDir>
+    <TargetName>SpectralForge-Core</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\Binaries\windows-x86_64\Release\SpectralForge-Core\</OutDir>
+    <IntDir>..\Binaries\Intermediates\windows-x86_64\Release\SpectralForge-Core\</IntDir>
+    <TargetName>SpectralForge-Core</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <OutDir>..\Binaries\windows-x86_64\Dist\SpectralForge-Core\</OutDir>
+    <IntDir>..\Binaries\Intermediates\windows-x86_64\Dist\SpectralForge-Core\</IntDir>
+    <TargetName>SpectralForge-Core</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\ImGuiManager.h" />
+    <ClInclude Include="Source\IndexBuffer.h" />
+    <ClInclude Include="Source\OpenGLUtils.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\VertexBuffer.h" />
+    <ClInclude Include="Source\dependencies\imgui\imconfig.h" />
+    <ClInclude Include="Source\dependencies\imgui\imgui.h" />
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Source\dependencies\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\dependencies\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Source\dependencies\imgui\imstb_textedit.h" />
+    <ClInclude Include="Source\dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="Source\dependencies\include\GL\eglew.h" />
+    <ClInclude Include="Source\dependencies\include\GL\glew.h" />
+    <ClInclude Include="Source\dependencies\include\GL\glxew.h" />
+    <ClInclude Include="Source\dependencies\include\GL\wglew.h" />
+    <ClInclude Include="Source\dependencies\include\GLFW\glfw3.h" />
+    <ClInclude Include="Source\dependencies\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\common.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\exponential.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\geometric.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\integer.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\matrix.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\neon.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\packing.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\platform.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\trigonometric.h" />
+    <ClInclude Include="Source\dependencies\include\glm\simd\vector_relational.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imconfig.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imgui.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="Source\dependencies\include\stb\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\ImGuiManager.cpp" />
+    <ClCompile Include="Source\IndexBuffer.cpp" />
+    <ClCompile Include="Source\OpenGLUtils.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\VertexBuffer.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp" />
+    <ClCompile Include="Source\dependencies\include\glm\glm.cppm">
+      <ObjectFileName>$(IntDir)\glm1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp">
+      <ObjectFileName>$(IntDir)\imgui1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp">
+      <ObjectFileName>$(IntDir)\imgui_demo1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp">
+      <ObjectFileName>$(IntDir)\imgui_draw1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp">
+      <ObjectFileName>$(IntDir)\imgui_impl_glfw1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp">
+      <ObjectFileName>$(IntDir)\imgui_tables1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp">
+      <ObjectFileName>$(IntDir)\imgui_widgets1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Source\stb.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

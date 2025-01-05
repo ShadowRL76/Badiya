@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Source\WindowManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\SpectralForge-Viewer.cpp" />
+    <ClCompile Include="Source\WindowManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\SimpleFragmentShader.fragmentshader" />
+    <None Include="Source\skybox.vertexshader" />
+    <None Include="Source\skybox.fragmentshader" />
+    <None Include="Source\SimpleVertexShader.vertexshader" />
+    <None Include="Source\imgui.ini" />
+  </ItemGroup>
+</Project>

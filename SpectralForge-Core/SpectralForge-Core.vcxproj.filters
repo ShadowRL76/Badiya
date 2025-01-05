@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dependencies">
+      <UniqueIdentifier>{8CAD9F58-7810-2FFD-2196-67B30DD8FA7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\imgui">
+      <UniqueIdentifier>{F6B312BD-E297-D312-4BF8-CD6537FBBD94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include">
+      <UniqueIdentifier>{FFA0974E-EB2F-2118-944E-351380BC31BE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\GL">
+      <UniqueIdentifier>{014680B3-6D7D-C84A-7687-2C6EE23DEF43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\GLFW">
+      <UniqueIdentifier>{9ED3A994-0A96-DD1E-5346-6CABBF47B6FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\glm">
+      <UniqueIdentifier>{CE928923-BAB7-D8A3-E302-BE33CF86D7C1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\glm\detail">
+      <UniqueIdentifier>{D096646A-3C7A-73AA-457D-A1E6B1DF39FB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\glm\simd">
+      <UniqueIdentifier>{EADF6E36-56F8-5560-1FA5-E5F98B7CEAF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\imgui">
+      <UniqueIdentifier>{A9315E2C-9541-0AFD-FEFA-6E1BEA29F995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies\include\stb">
+      <UniqueIdentifier>{D7C68923-C3EB-D8A3-EC36-BE33D8BAD7C1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\ImGuiManager.h" />
+    <ClInclude Include="Source\IndexBuffer.h" />
+    <ClInclude Include="Source\OpenGLUtils.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\VertexBuffer.h" />
+    <ClInclude Include="Source\dependencies\imgui\imconfig.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imgui.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_glfw.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3_loader.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imgui_internal.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imstb_rectpack.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imstb_textedit.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\imgui\imstb_truetype.h">
+      <Filter>dependencies\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GL\eglew.h">
+      <Filter>dependencies\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GL\glew.h">
+      <Filter>dependencies\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GL\glxew.h">
+      <Filter>dependencies\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GL\wglew.h">
+      <Filter>dependencies\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GLFW\glfw3.h">
+      <Filter>dependencies\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\GLFW\glfw3native.h">
+      <Filter>dependencies\include\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\common.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\exponential.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\geometric.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\integer.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\matrix.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\neon.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\packing.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\platform.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\trigonometric.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\glm\simd\vector_relational.h">
+      <Filter>dependencies\include\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imconfig.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imgui.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_impl_glfw.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_internal.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_rectpack.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_textedit.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\imgui\imstb_truetype.h">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dependencies\include\stb\stb_image.h">
+      <Filter>dependencies\include\stb</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\ImGuiManager.cpp" />
+    <ClCompile Include="Source\IndexBuffer.cpp" />
+    <ClCompile Include="Source\OpenGLUtils.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\Texture.cpp" />
+    <ClCompile Include="Source\VertexBuffer.cpp" />
+    <ClCompile Include="Source\dependencies\imgui\imgui.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_demo.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_draw.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_impl_glfw.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_impl_opengl3.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_tables.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\imgui\imgui_widgets.cpp">
+      <Filter>dependencies\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp">
+      <Filter>dependencies\include\glm\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\glm\glm.cppm">
+      <Filter>dependencies\include\glm</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp">
+      <Filter>dependencies\include\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\stb.cpp" />
+  </ItemGroup>
+</Project>
