@@ -1,6 +1,8 @@
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(const void* p_data, unsigned int size)
+
+
+VertexBuffer::VertexBuffer(const void* p_data, const unsigned long long size)
 {
 	glGenBuffers(1, &m_RendererID);
 	glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -10,6 +12,67 @@ VertexBuffer::VertexBuffer(const void* p_data, unsigned int size)
 VertexBuffer::~VertexBuffer()
 {
 	glDeleteBuffers(1, &m_RendererID);
+	delete[] arr;
+}
+
+
+float* VertexBuffer::Cube()
+{
+		arr = new float[]
+		{
+			-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		-1.0f,-1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f,-1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f,-1.0f,
+		1.0f,-1.0f,-1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f,-1.0f,
+		1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f,-1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f,-1.0f, 1.0f, -5
+		};
+
+		return arr;
+}
+
+int VertexBuffer::GetCubeSize()
+{
+	arr = Cube();
+	int size{};
+
+	while (*arr != -5)
+	{
+		size++;
+		arr++;
+	}
+
+	return size;
 }
 
 void VertexBuffer::Bind() const

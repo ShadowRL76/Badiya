@@ -23,13 +23,13 @@
 int main()
 {
 	OpenGLInit init;
-	ImGuiManager ImGuiManager;
+	ImGuiManager guiManager;
 	WindowManager windowManager(&init);
 
 	auto window =
 		windowManager.CreateWindow(3840, 2160, "Graphics Engine", nullptr, nullptr);
 
-	ImGuiManager::Init(window.get());
+	guiManager.Init(window.get());
 	Camera cam;
 
 	static constexpr float skyboxVertices[]
@@ -66,59 +66,7 @@ int main()
 		5, 4, 0
 	};
 
-	static constexpr  float s_VertexBufferDataCube[] = {
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f
-	};
 
-	static constexpr unsigned int s_IndexBufferDataCube[] = {
-	0, 1, 2,   // Triangle 1
-	3, 4, 5,   // Triangle 2
-	6, 7, 8,   // Triangle 3
-	9, 10, 11, // Triangle 4
-	12, 13, 14,// Triangle 5
-	15, 16, 17,// Triangle 6
-	18, 19, 20,// Triangle 7
-	21, 22, 23,// Triangle 8
-	24, 25, 26,// Triangle 9
-	27, 28, 29,// Triangle 10
-	30, 31, 32,// Triangle 11
-	33, 34, 35 // Triangle 12
-	};
 
 	static constexpr float s_ColorBufferData[] = {
 	0.583f,  0.771f,  0.014f,
@@ -226,15 +174,19 @@ int main()
 
 	unsigned int VertexArrayID{};
 	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
 
-	VertexBuffer vertexBuffer(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube));
-	VertexBuffer vertexBufferTriangle(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube));
-	VertexBuffer vertexBufferSquareTwo(s_VertexBufferDataCube, sizeof(s_VertexBufferDataCube));
+	VertexBuffer vb;
+	int vbSize = vb.GetCubeSize();
+	float* vbArr = vb.Cube();
+	unsigned long long vbSizeInBytes = vbSize * sizeof(float);
+	VertexBuffer vertexBuffer(vbArr, vbSizeInBytes);
 
-	IndexBuffer indexBufferSquareOne(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube));
-	IndexBuffer indexBufferTriangle(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube));
-	IndexBuffer indexBufferSquareTwo(s_IndexBufferDataCube, sizeof(s_IndexBufferDataCube));
+
+	IndexBuffer ib;
+	int ibSize = ib.GetCubeSize();
+	int* ibArr = ib.Cube();
+	unsigned long long sizeInBytes = ibSize * sizeof(float);
+	IndexBuffer indexBuffer(ibArr, sizeInBytes); 
 
 	uint32_t colorBuffer{};
 	glGenBuffers(1, &colorBuffer);
@@ -298,17 +250,18 @@ int main()
 
 		shader1.Activate();
 
-		indexBufferSquareOne.Bind();
+		indexBuffer.Bind();
+
 		glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPOne));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 
-		indexBufferTriangle.Bind();
 		glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPTwo));
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
-		indexBufferSquareTwo.Bind();
 		glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPThree));
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+
+
 
 		glDepthFunc(GL_LEQUAL);
 		//glm::mat4 view(1.0f);
@@ -329,12 +282,8 @@ int main()
 
 		glDepthFunc(GL_LESS);
 		glBindVertexArray(VertexArrayID);
-		vertexBuffer.Bind();
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-		glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
-		ImGuiManager.RenderUI(pm);
+		guiManager.RenderUI(pm); 
 
 		// Swap buffers
 		glfwSwapBuffers(window.get());

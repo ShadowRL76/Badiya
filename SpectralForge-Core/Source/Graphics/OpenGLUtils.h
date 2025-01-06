@@ -1,40 +1,43 @@
 #ifndef OPENGL_UTILS_H
 #define OPENGL_UTILS_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <GL/glew.h>    
+#include <GLFW/glfw3.h> 
 
-#include <iostream>
-#include <memory>
+#include <iostream>     
+#include <memory>       
 
-/// <summary>
-/// A utility class responsible for initializing OpenGL and managing the OpenGL context.
-/// </summary>
+/**
+ * @class OpenGLInit
+ * @brief A utility class to initialize OpenGL, GLEW, and manage the OpenGL context.
+ */
 class OpenGLInit {
 private:
-	/// <summary>
-	/// Stores the OpenGL version string after initialization.
-	/// This can be used to verify that the context is properly set up.
-	/// </summary>
-	GLubyte* openGLVersion{}; // You can uncomment or implement if applicable in private use.
+    /**
+     * @brief Stores the OpenGL version string after initialization.
+     * Useful for confirming that the OpenGL context has been properly set up.
+     */
+    GLubyte* openGLVersion{};
 
 public:
-	/// <summary>
-	/// Constructor for the OpenGLInit class.
-	/// Initializes OpenGL and sets up the necessary context, such as GLFW and GLEW.
-	/// </summary>
-	OpenGLInit();
+    /**
+     * @brief Constructor for the OpenGLInit class.
+     * Responsible for setting up the OpenGL context and ensuring necessary libraries (like GLFW and GLEW) are initialized.
+     */
+    OpenGLInit();
 
-	/// <summary>
-	/// Initializes the GLEW library to ensure proper functionality of OpenGL extensions.
-	/// </summary>
-	void GlewInit();
+    /**
+     * @brief Initializes the GLEW library.
+     * Ensures that OpenGL extensions are properly loaded and ready for use.
+     * This must be called after an OpenGL context has been created (e.g., using GLFW).
+     */
+    void GlewInit();
 
-	/// <summary>
-	/// Retrieves the current OpenGL version as a string.
-	/// </summary>
-	/// <returns>A pointer to a string containing the OpenGL version.</returns>
-	GLubyte* GetOpenGLVersion();
+    /**
+     * @brief Retrieves the current OpenGL version as a string.
+     * @return A pointer to a string containing the OpenGL version.
+     */
+    GLubyte* GetOpenGLVersion();
 };
 
 #endif // OPENGL_UTILS_H

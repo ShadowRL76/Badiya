@@ -1,76 +1,72 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <glm/glm.hpp>
-#include <GLFW/glfw3.h>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm/glm.hpp>                 
+#include <GLFW/glfw3.h>                
+#include <glm/gtc/matrix_transform.hpp> 
 
-#include <memory>
+#include <memory>                      
 
-/// <summary>
-/// Camera class that manages camera movement and viewing in a 3D scene.
-/// </summary>
+/**
+ * @class Camera
+ * @brief Manages the camera's position, orientation, and movement in a 3D scene.
+ */
 class Camera {
+public:
+    // Smart pointer to store the camera's position in 3D space.
+    std::unique_ptr<glm::vec3> m_cameraPos{};
+
+    // Smart pointer to define the camera's movement speed.
+    std::unique_ptr<float> m_cameraSpeed{};
+
+    // Smart pointer to represent the direction the camera is facing.
+    std::unique_ptr<glm::vec3> m_cameraFront{};
+
+    // Smart pointer to store the "up" direction of the camera.
+    std::unique_ptr<glm::vec3> m_cameraUp{};
 
 public:
-	std::unique_ptr<glm::vec3> m_cameraPos{};
-	/// <summary>
-	/// Camera movement speed.
-	/// </summary>
-	std::unique_ptr<float> m_cameraSpeed{};
+    /**
+     * @brief Constructor for the Camera class.
+     * Initializes the camera's position, direction, "up" vector, and movement speed.
+     * Sets up a default view and orientation for the camera.
+     */
+    Camera();
 
-	/// <summary>
-	/// Camera position in the 3D space.
-	/// </summary>
-	/// <summary>
-	/// Direction the camera is facing.
-	/// </summary>
-	std::unique_ptr<glm::vec3> m_cameraFront{};
+    /**
+     * @brief Handles camera movement based on user input.
+     * Captures input from the given GLFW window to control the camera's position and orientation.
+     * @param window The GLFW window to capture user input.
+     */
+    void Controls(GLFWwindow* window) const;
 
-	/// <summary>
-	/// The "up" direction vector for the camera.
-	/// </summary>
-	std::unique_ptr<glm::vec3> m_cameraUp{};
-public:
-	/// <summary>
-	/// Constructor for the Camera class.
-	/// Initializes camera position, front, up vectors, and movement speed.
-	/// </summary>
-	/// <param name="window">The GLFW window used to capture user input.</param>
-	Camera();
+    /**
+     * @brief Gets the view matrix for the camera.
+     * The view matrix transforms world coordinates to camera coordinates.
+     * @return A glm::mat4 representing the view matrix.
+     */
+    glm::mat4 GetViewMatrix() const;
 
-	/// <summary>
-	/// Handles camera movement and control based on user input.
-	/// </summary>
-	/// <param name="window">The GLFW window used to capture user input.</param>
-	void Controls(GLFWwindow* window) const;
+    /**
+     * @brief Gets the projection matrix for the camera.
+     * The projection matrix transforms 3D coordinates into 2D screen space.
+     * @return A glm::mat4 representing the projection matrix.
+     */
+    glm::mat4 GetProjectionMatrix();
 
-	/// <summary>
-	/// Returns the camera's view matrix.
-	/// The view matrix is used to transform world coordinates to camera coordinates.
-	/// </summary>
-	/// <returns>A glm::mat4 representing the camera's view matrix.</returns>
-	glm::mat4 GetViewMatrix() const;
-
-	/// <summary>
-	/// Returns the camera's projection matrix.
-	/// The projection matrix defines how the 3D scene is projected onto the 2D screen.
-	/// </summary>
-	/// <returns>A glm::mat4 representing the camera's projection matrix.</returns>
-	glm::mat4 GetProjectionMatrix();
-
-	/// <summary>
-	/// Resets the camera to its initial position and orientation.
-	/// </summary>
-	/// <param name="window">The GLFW window (required for calling other methods, but not used directly in this function).</param>
-	void CameraReset(GLFWwindow* window) const;
+    /**
+     * @brief Resets the camera to its default position and orientation.
+     * Useful for returning the camera to its starting state.
+     * @param window The GLFW window (used for method calls but not directly in this function).
+     */
+    void CameraReset(GLFWwindow* window) const;
 };
 
-// Factory function to create a Camera object
-/// <summary>
-/// Creates and returns a Camera object initialized with the given window.
-/// </summary>
-/// <param name="window">The GLFW window to be passed to the Camera constructor.</param>
-/// <returns>A Camera object initialized with the given window.</returns>
+/**
+ * @brief Factory function to create a Camera object.
+ * Constructs a Camera instance and initializes it with the given GLFW window.
+ * @param window The GLFW window to initialize the Camera with.
+ * @return A fully initialized Camera object.
+ */
 
 #endif // CAMERA_H

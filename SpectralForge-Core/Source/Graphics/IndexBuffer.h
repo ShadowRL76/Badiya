@@ -1,54 +1,70 @@
 #ifndef INDEX_BUFFER_H
 #define INDEX_BUFFER_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <GL/glew.h>    
+#include <GLFW/glfw3.h> 
 
-/// <summary>
-/// Represents an index buffer used in OpenGL for storing element indices.
-/// </summary>
-class IndexBuffer
-{
+/**
+ * @class IndexBuffer
+ * @brief Represents an index buffer in OpenGL, used to store indices for drawing elements.
+ */
+class IndexBuffer {
 private:
-	/// <summary>
-	/// The renderer ID for the index buffer.
-	/// </summary>
-	unsigned int m_RendererID;
+    /**
+     * @brief The unique ID assigned by OpenGL to this index buffer.
+     * Used to refer to this specific buffer in OpenGL operations.
+     */
+    unsigned int m_RendererID;
 
-	/// <summary>
-	/// The number of indices in the index buffer.
-	/// </summary>
-	unsigned int m_Count;
+    int* arr = nullptr;
+
+    /**
+     * @brief The number of indices stored in this buffer.
+     * Helps manage buffer operations like rendering.
+     */
+    unsigned int m_Count;
 
 public:
-	/// <summary>
-	/// Constructor that creates an IndexBuffer from given data.
-	/// Initializes the buffer and stores the count of indices.
-	/// </summary>
-	/// <param name="data">Pointer to the index data array.</param>
-	/// <param name="count">The number of indices in the data array.</param>
-	IndexBuffer(const unsigned int* p_data, unsigned int count);
+    IndexBuffer() = default;
 
-	/// <summary>
-	/// Destructor that cleans up the index buffer resources.
-	/// </summary>
-	~IndexBuffer();
+    /**
+     * @brief Constructs an IndexBuffer and uploads data to the GPU.
+     * @param p_data Pointer to the array of indices to upload.
+     * @param count The number of indices in the array.
+     * Initializes the index buffer by generating a buffer, binding it, and uploading data.
+     */
+    IndexBuffer(const void* p_data, const unsigned long long count);
 
-	/// <summary>
-	/// Binds the index buffer for use in OpenGL.
-	/// </summary>
-	void Bind() const;
+    /**
+     * @brief Destructor for IndexBuffer.
+     * Cleans up OpenGL resources associated with the buffer.
+     */
+    ~IndexBuffer();
 
-	/// <summary>
-	/// Unbinds the index buffer, making it no longer active in OpenGL.
-	/// </summary>
-	void Unbind() const;
 
-	/// <summary>
-	/// Gets the number of indices in the buffer.
-	/// </summary>
-	/// <returns>The number of indices in the buffer.</returns>
-	unsigned int GetCount() const { return m_Count; }
+    int* Cube();
+
+
+    /**
+     * @brief Binds the index buffer.
+     * Makes the buffer active for subsequent OpenGL element drawing operations.
+     */
+    void Bind() const;
+
+    /**
+     * @brief Unbinds the index buffer.
+     * Deactivates the buffer to prevent unintended use.
+     */
+    void Unbind() const;
+
+    /**
+     * @brief Gets the total number of indices stored in the buffer.
+     * @return The number of indices in the buffer.
+     */
+    unsigned int GetCount() const { return m_Count; }
+
+    int GetCubeSize();
+
 };
 
-#endif
+#endif // INDEX_BUFFER_H
