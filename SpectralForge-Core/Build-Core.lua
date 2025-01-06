@@ -10,8 +10,7 @@ project "SpectralForge-Core"
    includedirs
    {
       "Source",
-      "Source/dependencies/include",
-      "Source/dependencies/imgui"
+      "Source/dependencies/include"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")

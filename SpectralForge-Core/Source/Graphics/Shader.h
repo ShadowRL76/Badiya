@@ -2,7 +2,7 @@
 #define SHADER_CLASS_H
 
 #include "GL/glew.h"
-#include <GL/glew.h>
+
 #include<string>
 #include<fstream>
 #include<sstream>

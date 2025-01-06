@@ -15,6 +15,7 @@ std::string get_file_contents(const char* filename)
 		return(contents);
 	}
 	throw std::runtime_error("Failed to open file: " + std::string(filename));
+
 }
 
 // Constructor that build the Shader Program from 2 different shaders

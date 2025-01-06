@@ -1,20 +1,24 @@
+#include "Window/WindowManager.h"
+
+// Third-party libraries
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <stb/stb_image.h>
+
+// SpectralForge-Core headers
+#include "Graphics/Shader.h"
+#include "Camera/Camera.h"
+#include "Graphics/OpenGLUtils.h"
+#include "ImGui/ImGuiManager.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/IndexBuffer.h"
+
+// Standard library
 #include <iostream>
 #include <string>
-#include <../../SpectralForge-Core/Source/dependencies/include/GL/glew.h>
-#include <../../SpectralForge-Core/Source/dependencies/include/GLFW/glfw3.h>
-#include <../../SpectralForge-Core/Source/dependencies/include/glm/glm.hpp>
-#include <../../SpectralForge-Core/Source/dependencies/include/glm/gtc/matrix_transform.hpp>
-#include <../../SpectralForge-Core/Source/dependencies/include/glm/gtc/type_ptr.hpp>
-#include <../../SpectralForge-Core/Source/dependencies/include/stb/stb_image.h>
-
-
-#include "../../SpectralForge-Core/Source/Shader.h"
-#include "../../SpectralForge-Core/Source/Camera.h"
-#include "../../SpectralForge-Core/Source/OpenGLUtils.h"
-#include "WindowManager.h"
-#include "../../SpectralForge-Core/Source/ImGuiManager.h"
-#include "../../SpectralForge-Core/Source/VertexBuffer.h"
-#include "../../SpectralForge-Core/Source/IndexBuffer.h"
 
 int main()
 {
@@ -175,12 +179,12 @@ int main()
 	glBindVertexArray(0);
 
 	std::string facesCubeMap[6] = {
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\right.jpg",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\left.jpg",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\top.jpg",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\bottom.jpg",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\front.jpg",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Core\\resources\\back.jpg"
+		"../SpectralForge-Core/resources/right.jpg",
+		"../SpectralForge-Core/resources/left.jpg",
+		"../SpectralForge-Core/resources/top.jpg",
+		"../SpectralForge-Core/resources/bottom.jpg",
+		"../SpectralForge-Core/resources/front.jpg",
+		"../SpectralForge-Core/resources/back.jpg"
 	};
 
 	unsigned int cubemapTexture;
@@ -237,16 +241,17 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(s_ColorBufferData), &s_ColorBufferData, GL_STATIC_DRAW);
 	Shader shader1(
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Viewer\\Source\\SimpleFragmentShader.fragmentshader",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Viewer\\Source\\SimpleVertexShader.vertexshader");
-
+		"../SpectralForge-Core/Source/Shaders/SimpleFragmentShader.fragmentshader",
+		"../SpectralForge-Core/Source/Shaders/SimpleVertexShader.vertexshader");
 	Shader shader2(
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Viewer\\Source\\skybox.vertexshader",
-		"C:\\Users\\Shadow\\source\\repos\\OpenGL_CPP\\SpectralForge-Viewer\\Source\\skybox.fragmentshader");
+		"../SpectralForge-Core/Source/Shaders/skybox.vertexshader",
+		"../SpectralForge-Core/Source/Shaders/skybox.fragmentshader");
 
-	glm::vec3 translateSquareOne(-3.0f, 0.0f, 0.0f);
-	glm::vec3 translateSquareTwo(6.0f, 0.0f, 0.0f);
-	glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f);
+
+	glm::vec3 translateSquareOne(3.0f, 0.0f, 0.0f);
+	glm::vec3 translateSquareTwo(-3.0f, 0.0f, 0.0f);
+	glm::vec3 translateTriangle(3.0f, 0.0f, 0.0f);
+
 	ImGuiManager::Params pm{ .camera = cam, .p_window = window.get(),
 		.SquareOne = translateSquareOne, .SquareTwo = translateSquareTwo, .Triangle = translateTriangle };
 
@@ -277,7 +282,7 @@ int main()
 
 		// Get the location of the MVP uniform
 		auto ModelTriangle = glm::mat4(1.0f);
-		constexpr float angle(glm::radians(90.0));
+		float angle(glm::radians(90.0));
 		ModelTriangle = rotate(ModelTriangle, angle, glm::vec3(0, 1, 0));
 		ModelTriangle = translate(ModelTriangle, translateTriangle);
 		glm::mat4 MVPTwo = cam.GetProjectionMatrix() * cam.GetViewMatrix() * ModelTriangle; // Combine them into the MVP matrix

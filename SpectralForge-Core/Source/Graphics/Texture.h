@@ -1,8 +1,11 @@
 ﻿#ifndef IMAGE_H
 #define IMAGE_H
+
+#include <stb/stb_image.h>
+
 #include <cstdint>
 #include <string>
-#include <stb/stb_image.h>
+
 
 class Image
 {

@@ -147,23 +147,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\WindowManager.h" />
+    <ClInclude Include="Source\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\SpectralForge-Viewer.cpp" />
-    <ClCompile Include="Source\WindowManager.cpp" />
+    <ClCompile Include="Source\main\SpectralForge-Viewer.cpp" />
+    <ClCompile Include="Source\window\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpectralForge-Core\SpectralForge-Core.vcxproj">
       <Project>{8CC1437F-78A5-04D5-E105-FF27CD08EF56}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Source\imgui.ini" />
-    <None Include="Source\SimpleVertexShader.vertexshader" />
-    <None Include="Source\SimpleFragmentShader.fragmentshader" />
-    <None Include="Source\skybox.fragmentshader" />
-    <None Include="Source\skybox.vertexshader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,14 +1,14 @@
 #include "WindowManager.h"
 
 std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>
-WindowManager::CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+WindowManager::CreateWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
 	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> window(
 		glfwCreateWindow(width, height, title, monitor, share),
 		glfwDestroyWindow
 	);
 
-	if (window == NULL)
+	if (window == nullptr)
 	{
 		std::cerr << "Failed to open GLFW window.\n";
 		glfwTerminate();

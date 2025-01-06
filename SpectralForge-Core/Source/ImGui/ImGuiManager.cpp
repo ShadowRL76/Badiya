@@ -1,4 +1,3 @@
-#include "OpenGLUtils.h"
 #include "ImGuiManager.h"
 
 void ImGuiManager::Init(GLFWwindow* p_window)

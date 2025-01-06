@@ -1,11 +1,16 @@
 #ifndef WINDOW_MANAGER_H
 #define WINDOW_MANAGER_H
 
-#include <../../SpectralForge-Core/Source/dependencies/include/GL/glew.h>
-#include <../../SpectralForge-Core/Source/dependencies/include/GLFW/glfw3.h>
+#include "Graphics/OpenGLUtils.h"
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <memory>
-#include "../../SpectralForge-Core/Source/OpenGLUtils.h"
+
+#include <iostream>
+#include <memory>
+
 
 /// <summary>
 /// A class responsible for managing GLFW windows, including creation and cleanup.
@@ -30,7 +35,7 @@ private:
 public:
 	WindowManager(OpenGLInit* p_init) : p_init(p_init) {}
 	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>
-		CreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+		CreateWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 };
 
 #endif

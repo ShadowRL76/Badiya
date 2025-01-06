@@ -76,7 +76,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -96,7 +96,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -121,7 +121,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;Source\dependencies\include;Source\dependencies\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;Source\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -142,23 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\ImGuiManager.h" />
-    <ClInclude Include="Source\IndexBuffer.h" />
-    <ClInclude Include="Source\OpenGLUtils.h" />
-    <ClInclude Include="Source\Renderer.h" />
-    <ClInclude Include="Source\Shader.h" />
-    <ClInclude Include="Source\Texture.h" />
-    <ClInclude Include="Source\VertexBuffer.h" />
-    <ClInclude Include="Source\dependencies\imgui\imconfig.h" />
-    <ClInclude Include="Source\dependencies\imgui\imgui.h" />
-    <ClInclude Include="Source\dependencies\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Source\dependencies\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Source\dependencies\imgui\imgui_internal.h" />
-    <ClInclude Include="Source\dependencies\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Source\dependencies\imgui\imstb_textedit.h" />
-    <ClInclude Include="Source\dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="Source\Camera\Camera.h" />
+    <ClInclude Include="Source\Graphics\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\OpenGLUtils.h" />
+    <ClInclude Include="Source\Graphics\Renderer.h" />
+    <ClInclude Include="Source\Graphics\Shader.h" />
+    <ClInclude Include="Source\Graphics\Texture.h" />
+    <ClInclude Include="Source\Graphics\VertexBuffer.h" />
+    <ClInclude Include="Source\ImGui\ImGuiManager.h" />
     <ClInclude Include="Source\dependencies\include\GL\eglew.h" />
     <ClInclude Include="Source\dependencies\include\GL\glew.h" />
     <ClInclude Include="Source\dependencies\include\GL\glxew.h" />
@@ -178,6 +169,8 @@
     <ClInclude Include="Source\dependencies\include\imgui\imconfig.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imgui.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Source\dependencies\include\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imgui_internal.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imstb_textedit.h" />
@@ -185,44 +178,26 @@
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\ImGuiManager.cpp" />
-    <ClCompile Include="Source\IndexBuffer.cpp" />
-    <ClCompile Include="Source\OpenGLUtils.cpp" />
-    <ClCompile Include="Source\Renderer.cpp" />
-    <ClCompile Include="Source\Shader.cpp" />
-    <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\VertexBuffer.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Source\dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\OpenGLUtils.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\Shader.cpp" />
+    <ClCompile Include="Source\Graphics\Texture.cpp" />
+    <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="Source\ImGui\ImGuiManager.cpp" />
     <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="Source\dependencies\include\glm\glm.cppm">
       <ObjectFileName>$(IntDir)\glm1.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp">
-      <ObjectFileName>$(IntDir)\imgui1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp">
-      <ObjectFileName>$(IntDir)\imgui_demo1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp">
-      <ObjectFileName>$(IntDir)\imgui_draw1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp">
-      <ObjectFileName>$(IntDir)\imgui_impl_glfw1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp">
-      <ObjectFileName>$(IntDir)\imgui_tables1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp">
-      <ObjectFileName>$(IntDir)\imgui_widgets1.obj</ObjectFileName>
-    </ClCompile>
-    <ClCompile Include="Source\stb.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\dependencies\stb.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
