@@ -1144,7 +1144,7 @@ export namespace glm {
 #   ifdef GLM_GTC_INLINE_NAMESPACE
 	inline
 #   endif
-	namespace gtc {
+		namespace gtc {
 #       if GLM_CONFIG_ALIGNED_GENTYPES == GLM_ENABLE
 		using glm::aligned_highp_vec1;
 		using glm::aligned_mediump_vec1;
@@ -1672,7 +1672,6 @@ export namespace glm {
 #       endif//GLM_PRECISION
 #       endif
 
-
 		using glm::abs;
 		using glm::acos;
 		using glm::acosh;
@@ -1996,7 +1995,7 @@ export namespace glm {
 #   ifdef GLM_EXT_INLINE_NAMESPACE
 	inline
 #   endif
-	namespace ext {
+		namespace ext {
 		using glm::abs;
 		using glm::acos;
 		using glm::acosh;
@@ -2191,7 +2190,7 @@ export namespace glm {
 #   ifdef GLM_GTX_INLINE_NAMESPACE
 	inline
 #   endif
-	namespace gtx {
+		namespace gtx {
 		using glm::io::order_type;
 		using glm::io::format_punct;
 		using glm::io::basic_state_saver;

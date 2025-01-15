@@ -150,7 +150,7 @@
     <ClInclude Include="Source\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main\SpectralForge-Viewer.cpp" />
+    <ClCompile Include="Source\main\main.cpp" />
     <ClCompile Include="Source\window\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>

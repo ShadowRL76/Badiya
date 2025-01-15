@@ -1,11 +1,9 @@
-﻿#ifndef IMAGE_H
-#define IMAGE_H
+﻿#pragma once
 
 #include <stb/stb_image.h>
 
 #include <cstdint>
 #include <string>
-
 
 class Image
 {
@@ -33,5 +31,3 @@ public:
 
 	uint8_t* GetPixels() const { return m_pixels; }
 };
-
-#endif

@@ -15,7 +15,6 @@ std::string get_file_contents(const char* filename)
 		return(contents);
 	}
 	throw std::runtime_error("Failed to open file: " + std::string(filename));
-
 }
 
 // Constructor that build the Shader Program from 2 different shaders
@@ -60,17 +59,16 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	// Delete the now useless Vertex and Fragment Shader objects
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-
 }
 
 // Activates the Shader Program
-void Shader::Activate()
+void Shader::Activate() const
 {
 	glUseProgram(ID);
 }
 
 // Deletes the Shader Program
-void Shader::Delete()
+void Shader::Delete() const
 {
 	glDeleteProgram(ID);
 }

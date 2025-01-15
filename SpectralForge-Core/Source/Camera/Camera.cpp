@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include "GLFW/glfw3.h"
+
 Camera::Camera()
 {
 	m_cameraSpeed = std::make_unique<float>(0.1f);
@@ -26,22 +28,20 @@ void Camera::Controls(GLFWwindow* p_window) const
 		m_cameraFront->y += 0.05f;
 	if (glfwGetKey(p_window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS)
 		m_cameraFront->y -= 0.05f;
-	if (glfwGetKey(p_window, GLFW_KEY_J) == GLFW_PRESS)
-		m_cameraFront->x += 0.05f;
-	if (glfwGetKey(p_window, GLFW_KEY_K) == GLFW_PRESS)
-		m_cameraFront->x -= 0.05f;
+
 	if (glfwGetKey(p_window, GLFW_KEY_R) == GLFW_PRESS)
 		CameraReset(p_window);
 }
 
+
 void Camera::CameraReset(GLFWwindow* p_window) const
 {
-	m_cameraPos->x = 2.5f, m_cameraPos->y = 2.0f, m_cameraPos->z = -15.0f,
-		m_cameraFront->x = 0.0f, m_cameraFront->y = 0.0f, m_cameraFront->z = 1.0f,
-		m_cameraUp->x = 0.0f, m_cameraUp->y = 1.0f, m_cameraUp->z = 0.0f;
+	m_cameraPos->x = 2.5f; m_cameraPos->y = 2.0f; m_cameraPos->z = -15.0f;
+		m_cameraFront->x = 0.0f; m_cameraFront->y = 0.0f; m_cameraFront->z = 1.0f;
+		m_cameraUp->x = 0.0f; m_cameraUp->y = 1.0f; m_cameraUp->z = 0.0f;
 }
 
-glm::mat4 Camera::GetProjectionMatrix()
+glm::mat4 Camera::GetProjectionMatrix() const 
 {
 	return glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 }

@@ -198,4 +198,21 @@
       <Filter>dependencies</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\skybottom.png" />
+    <Image Include="..\..\..\..\Downloads\skyfront.png" />
+    <Image Include="..\..\..\..\Downloads\skyback.png" />
+    <Image Include="..\..\..\..\Downloads\skyright.png" />
+    <Image Include="..\..\..\..\Downloads\skytop.png" />
+    <Image Include="..\..\..\..\Downloads\skyleft.png" />
+    <Image Include="resources\img.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Shaders\SimpleFragmentShader.fragmentshader" />
+    <None Include="Source\Shaders\SimpleVertexShader.vertexshader" />
+    <None Include="Source\Shaders\skybox.fragmentshader" />
+    <None Include="Source\Shaders\skybox.vertexshader" />
+    <None Include="Source\Shaders\TriangleTexture.fragmentshader" />
+    <None Include="Source\Shaders\TriangleTexture.vertexshader" />
+  </ItemGroup>
 </Project>

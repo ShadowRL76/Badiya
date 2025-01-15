@@ -199,6 +199,23 @@
     <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Source\dependencies\stb.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\skyback.png" />
+    <Image Include="..\..\..\..\Downloads\skybottom.png" />
+    <Image Include="..\..\..\..\Downloads\skyfront.png" />
+    <Image Include="..\..\..\..\Downloads\skyleft.png" />
+    <Image Include="..\..\..\..\Downloads\skyright.png" />
+    <Image Include="..\..\..\..\Downloads\skytop.png" />
+    <Image Include="resources\img.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Shaders\SimpleFragmentShader.fragmentshader" />
+    <None Include="Source\Shaders\SimpleVertexShader.vertexshader" />
+    <None Include="Source\Shaders\skybox.fragmentshader" />
+    <None Include="Source\Shaders\skybox.vertexshader" />
+    <None Include="Source\Shaders\TriangleTexture.fragmentshader" />
+    <None Include="Source\Shaders\TriangleTexture.vertexshader" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

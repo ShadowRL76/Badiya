@@ -14,7 +14,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main\SpectralForge-Viewer.cpp">
+    <ClCompile Include="Source\main\main.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="Source\window\WindowManager.cpp">

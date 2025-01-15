@@ -1,5 +1,4 @@
-#ifndef SHADER_CLASS_H
-#define SHADER_CLASS_H
+#pragma once
 
 #include <GL/glew.h>
 
@@ -22,35 +21,33 @@ std::string get_file_contents(const char* filename);
  */
 class Shader {
 public:
-    /**
-     * @brief The unique identifier for the OpenGL Shader Program.
-     */
-    GLuint ID;
+	/**
+	 * @brief The unique identifier for the OpenGL Shader Program.
+	 */
+	GLuint ID;
 
-    /**
-     * @brief Constructs the Shader Program from a vertex shader file and a fragment shader file.
-     * @param vertexFile Path to the vertex shader source file.
-     * @param fragmentFile Path to the fragment shader source file.
-     */
-    Shader(const char* vertexFile, const char* fragmentFile);
+	/**
+	 * @brief Constructs the Shader Program from a vertex shader file and a fragment shader file.
+	 * @param vertexFile Path to the vertex shader source file.
+	 * @param fragmentFile Path to the fragment shader source file.
+	 */
+	Shader(const char* vertexFile, const char* fragmentFile);
 
-    /**
-     * @brief Activates the Shader Program for use in rendering.
-     */
-    void Activate();
+	/**
+	 * @brief Activates the Shader Program for use in rendering.
+	 */
+	void Activate() const;
 
-    /**
-     * @brief Deletes the Shader Program and frees resources.
-     */
-    void Delete();
+	/**
+	 * @brief Deletes the Shader Program and frees resources.
+	 */
+	void Delete() const;
 
 private:
-    /**
-     * @brief Checks if the given shader or program has compiled/linked correctly.
-     * @param shader The shader or program ID to check.
-     * @param type The type of shader ("VERTEX", "FRAGMENT", or "PROGRAM").
-     */
-    void compileErrors(unsigned int shader, const char* type);
+	/**
+	 * @brief Checks if the given shader or program has compiled/linked correctly.
+	 * @param shader The shader or program ID to check.
+	 * @param type The type of shader ("VERTEX", "FRAGMENT", or "PROGRAM").
+	 */
+	static void compileErrors(unsigned int shader, const char* type);
 };
-
-#endif // SHADER_CLASS_H

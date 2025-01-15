@@ -1,5 +1,7 @@
 #include "ImGuiManager.h"
 
+#include "Graphics/Renderer.h"
+
 void ImGuiManager::Init(GLFWwindow* p_window)
 {
 	ImGui::CreateContext();
@@ -9,7 +11,7 @@ void ImGuiManager::Init(GLFWwindow* p_window)
 	ImGui_ImplOpenGL3_Init("#version 330");
 }
 
-void ImGuiManager::RenderUI(const Params& pm) const
+void ImGuiManager::RenderUI(const Params& pm)
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -42,7 +44,7 @@ void ImGuiManager::RenderUI(const Params& pm) const
 		ShowUserGuide();
 	}
 	ShowControlsSection(pm.camera, pm.p_window, pm.SquareOne, pm.SquareTwo, pm.Triangle);
-
+	DebugTab(pm.camera);
 	ImGui::End();
 
 	ImGui::Render();
@@ -72,33 +74,69 @@ void ImGuiManager::ShowUserGuide()
 	ImGui::Unindent();
 	ImGui::Unindent();
 }
+
 void ImGuiManager::ShowControlsSection(const Camera& camera, GLFWwindow* p_window,
-	glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle) const
+	glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle) 
 {
 	if (ImGui::CollapsingHeader("Controls"))
 	{
-		ImGui::Text("OpenGL_Version: %s", p_init->GetOpenGLVersion());
-		ImGui::SliderFloat3("Translate Square One", glm::value_ptr(SquareOne), -20.0f, 20.0f);
-		ImGui::SliderFloat3("Translate Square Two", glm::value_ptr(SquareTwo), -20.0f, 20.0f);
-		ImGui::SliderFloat3("Translate Triangle", glm::value_ptr(Triangle), -20.0f, 20.0f);
-
-		ImGui::Text("FPS %f", ImGui::GetIO().Framerate);
-		ImGui::Text("Application average %.3f", 1000.0f / ImGui::GetIO().Framerate);
-
+		ImGui::SliderFloat3("Translate Square One", value_ptr(SquareOne), -20.0f, 20.0f);
+		ImGui::SliderFloat3("Translate Square Two", value_ptr(SquareTwo), -20.0f, 20.0f);
+		ImGui::SliderFloat3("Translate Triangle", value_ptr(Triangle), -20.0f, 20.0f);
 		if (ImGui::Button("Reset"))
 		{
 			SquareOne = glm::vec3(-3.0f, 0.0f, 0.0f);
 			SquareTwo = glm::vec3(6.0f, 0.0f, 0.0f);
 			Triangle = glm::vec3(2.0f, 0.0f, 0.0f);
+			 
+			CubeRotationEnabled = false;
 			camera.CameraReset(p_window);
 		}
+		if (ImGui::Button("Rotate Cubes 360")) 
+		{
+			CubeRotationEnabled = true;
+		}
+
 		if (ImGui::Button("Add Square"))
 		{
-			//TODO: Add a square Soon! Clean up code for this and add a draw new objects function!
 		}
 		if (ImGui::Button("Close Me"))
 		{
 			glfwSetWindowShouldClose(p_window, true);
+		}
+	}
+}
+
+void ImGuiManager::DebugTab(const Camera& camera)
+{
+	static bool wireFrameMode = false;
+
+	if (ImGui::CollapsingHeader("Debug"))
+	{
+		ImGui::Text("OpenGL_Version: %s", p_init->GetOpenGLVersion());
+		ImGui::Text("FPS %f", ImGui::GetIO().Framerate);
+		ImGui::Text("Application average %.3f", 1000.0f / ImGui::GetIO().Framerate);
+		ImGui::Text("Cameras Position %f, %f, %f", camera.m_cameraPos->x, camera.m_cameraPos->y, camera.m_cameraPos->z);
+
+		if (ImGui::Button("Disable Skybox Shader"))
+		{
+			shader2Enabled = !shader2Enabled;
+		}
+		if (ImGui::Button("Disable Cubes Shader"))
+		{
+			shader1Enabled = !shader1Enabled;
+		}
+
+		if (ImGui::Checkbox("WireFrame Mode", &wireFrameMode))
+		{
+			if (wireFrameMode)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
+			else
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
 		}
 	}
 }
