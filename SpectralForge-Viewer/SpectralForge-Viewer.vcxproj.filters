@@ -9,16 +9,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\window\WindowManager.h">
-      <Filter>window</Filter>
-    </ClInclude>
+    <ClCompile Include="Source\main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main\main.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\window\WindowManager.cpp">
-      <Filter>window</Filter>
-    </ClCompile>
+    <None Include="Source\main\imgui.ini" />
   </ItemGroup>
 </Project>

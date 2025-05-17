@@ -15,6 +15,19 @@
 		glm::mat4 MVPOne = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 */
 
+//Renderable Object includes like Draw and Set the mvp
+
+//Mesh Renderer Renderers the Meshers/ Objects
+
+
+class RenderableObject
+{
+
+};
+
+// if button clicked new mvp made 
+
+
 class Shape {
 private:
 	float angle{};
@@ -67,6 +80,14 @@ class Triangle : public Shape
 public:
 	void draw() override {}
 };
+
+template <typename T>
+void RenderObject(const T& renderable) {
+	renderable.Bind();
+	glDrawElements(GL_TRIANGLES, renderable.GetIndexCount(), GL_UNSIGNED_INT, nullptr);
+	renderable.Unbind();
+}
+
 
 template <typename T>
 class Renderer

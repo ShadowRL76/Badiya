@@ -12,11 +12,11 @@ WindowManager::CreateWindow(const int width, const int height, const char* title
 	{
 		std::cerr << "Failed to open GLFW window.\n";
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		quick_exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window.get()); // Initialize GLEW
 
-	p_init->GlewInit();
+	OpenGLInit::GlewInit();
 
 	glfwSetInputMode(window.get(), GLFW_STICKY_KEYS, GL_TRUE);
 	return window;

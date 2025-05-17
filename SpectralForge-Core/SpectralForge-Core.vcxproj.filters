@@ -141,6 +141,10 @@
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h">
       <Filter>dependencies\include\stb</Filter>
     </ClInclude>
+    <ClInclude Include="Source\window\WindowManager.h" />
+    <ClInclude Include="Source\Graphics\Scene\Scene.h" />
+    <ClInclude Include="Source\dependencies\include\entt\entt.hpp" />
+    <ClInclude Include="Source\Graphics\Scene\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp">
@@ -197,6 +201,9 @@
     <ClCompile Include="Source\dependencies\stb.cpp">
       <Filter>dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\window\WindowManager.cpp" />
+    <ClCompile Include="Source\Graphics\Scene\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\Scene\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\skybottom.png" />

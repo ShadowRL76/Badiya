@@ -25,11 +25,12 @@ public:
 	 * @brief A helper structure to encapsulate parameters needed for rendering the ImGui UI.
 	 */
 	struct Params {
-		Camera& camera;          ///< Reference to the Camera object used for scene manipulation.
+		std::reference_wrapper<Camera> camera;          ///< Reference to the Camera object used for scene manipulation.
 		GLFWwindow* p_window;    ///< Pointer to the GLFW window used for rendering.
-		glm::vec3& SquareOne;    ///< Translation vector for the first square object.
-		glm::vec3& SquareTwo;    ///< Translation vector for the second square object.
-		glm::vec3& Triangle;     ///< Translation vector for the triangle object.
+		std::reference_wrapper<glm::vec3> SquareOne;    ///< Translation vector for the first square object.
+		std::reference_wrapper<glm::vec3> SquareTwo;    ///< Translation vector for the second square object.
+		std::reference_wrapper<glm::vec3> Triangle;     ///< Translation vector for the triangle object.
+		std::reference_wrapper<ImGuiManager> instance;
 	};
 
 private:
@@ -70,13 +71,13 @@ public:
 	 * @brief Default constructor for the ImGuiManager class.
 	 * Initializes an empty ImGuiManager instance.
 	 */
-	ImGuiManager() = default;
+ImGuiManager() = default;
 
 	/**
 	 * @brief Initializes the ImGui context and sets up OpenGL and GLFW bindings.
 	 * @param p_window Pointer to the GLFW window used for rendering the ImGui UI.
 	 */
-	static void Init(GLFWwindow* p_window);
+	static void Init(GLFWwindow* p_window, ImGuiManager& instance);
 
 	/**
 	 * @brief Renders the ImGui UI for user interaction with the application.

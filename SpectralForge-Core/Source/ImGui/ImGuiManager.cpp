@@ -2,7 +2,7 @@
 
 #include "Graphics/Renderer.h"
 
-void ImGuiManager::Init(GLFWwindow* p_window)
+void ImGuiManager::Init(GLFWwindow* p_window, ImGuiManager& instance)
 {
 	ImGui::CreateContext();
 	ImGuiIO const& io = ImGui::GetIO(); (void)io;
@@ -113,7 +113,7 @@ void ImGuiManager::DebugTab(const Camera& camera)
 
 	if (ImGui::CollapsingHeader("Debug"))
 	{
-		ImGui::Text("OpenGL_Version: %s", p_init->GetOpenGLVersion());
+		ImGui::Text("OpenGL_Version: %s", OpenGLInit::GetOpenGLVersion());
 		ImGui::Text("FPS %f", ImGui::GetIO().Framerate);
 		ImGui::Text("Application average %.3f", 1000.0f / ImGui::GetIO().Framerate);
 		ImGui::Text("Cameras Position %f, %f, %f", camera.m_cameraPos->x, camera.m_cameraPos->y, camera.m_cameraPos->z);

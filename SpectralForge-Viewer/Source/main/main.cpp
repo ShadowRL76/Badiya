@@ -15,23 +15,39 @@
 #include "ImGui/ImGuiManager.h"
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/IndexBuffer.h"
+#include "Graphics/Scene/Scene.h"
+#include <Graphics/Scene/Entity.h>
 
 // Standard library
 #include <iostream>
 #include <string>
+#include <cstddef>
+
+
+//TODO: Create Mesh Template for VBO and IBO
+//TODO: Finish up Entity and Also Create Scene
+//TODO: Create Common Includes?
+//TODO: ADD COMPONENTS HEADER FOR TEMPLATES!!!! ETC BYE BABY GORL ALAHU AK BAR!!!!!!!!
 
 int main()
 {
 	OpenGLInit init;
-	ImGuiManager guiManager;
 	WindowManager windowManager(&init);
+	ImGuiManager guiManager;
 
 	auto window =
-		windowManager.CreateWindow(3840, 2160, "Graphics Engine", 
+		windowManager.CreateWindow(3840, 2160, "Graphics Engine",
 			nullptr, nullptr);
 
-	guiManager.Init(window.get());
+	ImGuiManager::Init(window.get(), guiManager);
 	Camera cam;
+
+
+	struct Vertex
+	{
+		float position[3];
+		float texCoord[2];
+	};
 
 	static constexpr float skyboxVertices[]
 	{
@@ -66,6 +82,25 @@ int main()
 		0, 1, 5,
 		5, 4, 0
 	};
+
+
+	// Position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// Normal
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	// TexCoords
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	glBindVertexArray(0);
+
+
+
+
 
 
 	unsigned int skyboxVAO, skyboxVBO, skyboxEBO;
@@ -148,6 +183,7 @@ int main()
 	unsigned long long sizeInBytes = ibSize * sizeof(float);
 	IndexBuffer indexBuffer(ibArr, sizeInBytes);
 
+
 	Shader shader1(
 		"../SpectralForge-Core/Source/Shaders/SimpleFragmentShader.fragmentshader",
 		"../SpectralForge-Core/Source/Shaders/SimpleVertexShader.vertexshader");
@@ -161,7 +197,7 @@ int main()
 
 	ImGuiManager::Params pm{ .camera = cam, .p_window = window.get(),
 		.SquareOne = translateSquareOne, .SquareTwo = translateSquareTwo,
-		.Triangle = translateTriangle}; 
+		.Triangle = translateTriangle, .instance = guiManager };
 
 
 
@@ -200,7 +236,8 @@ int main()
 		cam.Controls(window.get());
 
 		glm::mat4 rotationMatrix = rotate(glm::mat4(1.0f), 
-			glm::radians(yRotationAngle), glm::vec3(0.0f, 1.0f, 0.0f)); 
+			glm::radians(yRotationAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+
 
 		// creates a model matrix. This matrix is used to position,
 		// scale, and rotate objects in the world. By default, it's the identity matrix (1.0f),
@@ -233,9 +270,9 @@ int main()
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, texture);
 
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), reinterpret_cast<void*>(offsetof(Vertex, texCoord)));
 
 			shader1.Activate();
 			glUniform1i(glGetUniformLocation(shader1.ID, "textureSampler"), 0);
@@ -251,6 +288,7 @@ int main()
 			glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPThree));
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 		}
+
 
 		glDepthFunc(GL_LEQUAL);
 		//glm::mat4 view(1.0f);

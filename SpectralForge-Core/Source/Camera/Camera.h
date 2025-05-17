@@ -23,7 +23,7 @@ private:
 public:
 	// Smart pointer to store the camera's position in 3D space.
 	std::unique_ptr<glm::vec3> m_cameraPos;
-public:
+
 	/**
 	 * @brief Constructor for the Camera class.
 	 * Initializes the camera's position, direction, "up" vector, and movement speed.

@@ -32,7 +32,7 @@ public:
 	 * @param count The number of indices in the array.
 	 * Initializes the index buffer by generating a buffer, binding it, and uploading data.
 	 */
-	IndexBuffer(const void* p_data, const unsigned long long count);
+	IndexBuffer(const void* p_data, unsigned int count);
 
 	/**
 	 * @brief Destructor for IndexBuffer.
@@ -52,13 +52,13 @@ public:
 	 * @brief Unbinds the index buffer.
 	 * Deactivates the buffer to prevent unintended use.
 	 */
-	void Unbind() const;
+	static void Unbind();
 
 	/**
 	 * @brief Gets the total number of indices stored in the buffer.
 	 * @return The number of indices in the buffer.
 	 */
-	unsigned int GetCount() const { return m_Count; }
+	[[nodiscard]] unsigned int GetCount() const { return m_Count; }
 
 	int GetCubeSize();
 };

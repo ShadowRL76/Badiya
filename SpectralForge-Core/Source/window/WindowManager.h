@@ -26,7 +26,7 @@ public:
 	 * Initializes the OpenGLInit object to manage OpenGL context.
 	 * @param p_init A pointer to an OpenGLInit object.
 	 */
-	WindowManager(OpenGLInit* p_init) : p_init(p_init) {}
+	explicit WindowManager(OpenGLInit* p_init) : p_init(p_init) {}
 
 	/**
 	 * @brief Creates a new GLFW window with the specified parameters.
