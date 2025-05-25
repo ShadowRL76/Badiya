@@ -1,79 +1,62 @@
 #pragma once
+/**/
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <stb/stb_image.h>
+#include <string>
+namespace Badiya {
 
-#include "Shader.h"
-#include "Camera/Camera.h"
+	class Renderer
+	{
 
-/*
-		auto Model = glm::mat4(1.0f);
-		glm::mat4 MVPOne = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
-*/
+	public:
+		unsigned int* m_skyboxVAO{}, m_skyboxVBO{}, m_skyboxEBO{};
+		unsigned int m_TextureID{};
+		static unsigned int m_textureID;
+		static int m_widthImg, m_heightImg, m_numColCh;
 
-class Shape {
-private:
-	float angle{};
-protected:
-	Camera cam;
-	glm::vec3 spawnTranslation = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::mat4 model = glm::mat4(1.0f);
-	glm::mat4 viewProjection = cam.GetProjectionMatrix() * cam.GetViewMatrix() * model;
-	glm::mat4 mvp = viewProjection;
+		static constexpr float skyboxVertices[]
+		{
+			-1.0f, -1.0f, 1.0f,
+			1.0f, -1.0f, 1.0f,
+			1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f, -1.0f,
+			-1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, -1.0f,
+			-1.0f, 1.0f, -1.0f
+		};
 
-public:
+		static constexpr unsigned int skyboxIndices[]
+		{
+			// Right face
+			1, 2, 6,
+			6, 5, 1,
+			// Left face
+			0, 4, 7,
+			7, 3, 0,
+			// Top face
+			4, 5, 6,
+			6, 7, 4,
+			// Bottom face
+			0, 1, 2,
+			2, 3, 0,
+			// Back face
+			3, 2, 6,
+			6, 7, 3,
+			// Front face
+			0, 1, 5,
+			5, 4, 0
+		};
+	public:
+		enum class BufferType : uint8_t { Skybox, Object };
 
-	Shape() : angle(glm::radians(0.0f)) {}
+		Renderer() = default;
+		Renderer(const float* vertices, size_t vertSize, const unsigned int* indices, size_t idxSize);
 
-	virtual void draw() {}
+		unsigned int CreateSkyboxVAO(const float* vertices, size_t vertSize, const unsigned int* indices, size_t idxSize);
+		static unsigned int LoadCubeMap(const std::string faces[6]);
 
-	void setAngle(const float degrees) {
-		angle = glm::radians(degrees);
-		updateViewProjection();
-	}
+		void Draw();
+		static void BindBuffersAndGenBuffers(const BufferType type, GLsizei n, GLuint* arrays);
 
-	void setSpawnTranslation(const glm::vec3& translation) {
-		spawnTranslation = translation;
-		updateViewProjection();
-	}
-
-	void setModel(const glm::mat4& Model) {
-		model = Model;
-		updateViewProjection();
-	}
-
-	glm::mat4 updateViewProjection() {
-		viewProjection = cam.GetProjectionMatrix() * cam.GetViewMatrix() * model;
-		return viewProjection;
-	}
-
-	void setMVPMatrix(const glm::mat4& MVP) {
-		mvp = MVP;
-	}
-};
-
-class Cube : public Shape
-{
-public:
-	void draw() override {}
-};
-
-class Triangle : public Shape
-{
-public:
-	void draw() override {}
-};
-
-template <typename T>
-class Renderer
-{
-public:
-	Renderer();
-	void draw() const;
-private:
-	void set_shader();
-};
+	};
+}

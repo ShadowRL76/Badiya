@@ -56,6 +56,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\Binaries\windows-x86_64\Debug\SpectralForge-Core\</OutDir>
     <IntDir>..\Binaries\Intermediates\windows-x86_64\Debug\SpectralForge-Core\</IntDir>
+    <ModuleInterfaceOutputDir>$(IntDir)</ModuleInterfaceOutputDir>
     <TargetName>SpectralForge-Core</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -73,7 +74,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>Source;Source\dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -82,9 +83,10 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus /utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,8 +144,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationEvent.h" />
+    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="KeyEvent.h" />
+    <ClInclude Include="MouseCodes.h" />
+    <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
+    <ClInclude Include="Source\Camera\CameraController.h" />
+    <ClInclude Include="Source\Event.h" />
     <ClInclude Include="Source\Graphics\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\MeshLoader.h" />
+    <ClInclude Include="Source\Graphics\Model.h" />
     <ClInclude Include="Source\Graphics\OpenGLUtils.h" />
     <ClInclude Include="Source\Graphics\Renderer.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
@@ -156,6 +167,33 @@
     <ClInclude Include="Source\dependencies\include\GL\wglew.h" />
     <ClInclude Include="Source\dependencies\include\GLFW\glfw3.h" />
     <ClInclude Include="Source\dependencies\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\ai_assert.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\anim.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\camera.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\cexport.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\cfileio.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\cimport.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\color4.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\config.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\defs.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\importerdesc.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\light.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\material.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\matrix3x3.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\matrix4x4.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\mesh.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\metadata.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\postprocess.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\quaternion.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\scene.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\texture.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\types.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\vector2.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\vector3.h" />
+    <ClInclude Include="Source\dependencies\include\assimp\version.h" />
     <ClInclude Include="Source\dependencies\include\glm\simd\common.h" />
     <ClInclude Include="Source\dependencies\include\glm\simd\exponential.h" />
     <ClInclude Include="Source\dependencies\include\glm\simd\geometric.h" />
@@ -175,46 +213,166 @@
     <ClInclude Include="Source\dependencies\include\imgui\imstb_rectpack.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\async.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\async_logger.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\cfg\argv.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\cfg\env.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\cfg\helpers.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\common-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\common.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\os.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\registry.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\udp_client-windows.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\udp_client.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\args.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\base.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\os.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\std.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\bundled\xchar.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\chrono.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\compile.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\ranges.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\std.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fmt\xchar.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\formatter.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\fwd.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\logger-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\logger.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\mdc.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\callback_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\hourly_file_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\kafka_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\mongo_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\qt_sinks.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\udp_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\spdlog.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\stopwatch.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\tweakme.h" />
+    <ClInclude Include="Source\dependencies\include\spdlog\version.h" />
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h" />
+    <ClInclude Include="Source\Logging.h" />
+    <ClInclude Include="Source\pch.h" />
+    <ClInclude Include="Source\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Camera\CameraController.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\MeshLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Model.cpp" />
     <ClCompile Include="Source\Graphics\OpenGLUtils.cpp" />
     <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\Texture.cpp" />
     <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiManager.cpp" />
-    <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp" />
-    <ClCompile Include="Source\dependencies\include\glm\glm.cppm">
-      <ObjectFileName>$(IntDir)\glm1.obj</ObjectFileName>
+    <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Source\dependencies\stb.cpp" />
+    <ClCompile Include="Source\dependencies\include\imgui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_glfw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\dependencies\stb.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\Logging.cpp" />
+    <ClCompile Include="Source\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\window\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\skyback.png" />
-    <Image Include="..\..\..\..\Downloads\skybottom.png" />
-    <Image Include="..\..\..\..\Downloads\skyfront.png" />
-    <Image Include="..\..\..\..\Downloads\skyleft.png" />
-    <Image Include="..\..\..\..\Downloads\skyright.png" />
-    <Image Include="..\..\..\..\Downloads\skytop.png" />
-    <Image Include="resources\img.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Source\Shaders\SimpleFragmentShader.fragmentshader" />
-    <None Include="Source\Shaders\SimpleVertexShader.vertexshader" />
-    <None Include="Source\Shaders\skybox.fragmentshader" />
-    <None Include="Source\Shaders\skybox.vertexshader" />
-    <None Include="Source\Shaders\TriangleTexture.fragmentshader" />
-    <None Include="Source\Shaders\TriangleTexture.vertexshader" />
+    <!-- Disable PCH for all .cpp files in Source\dependencies and its subfolders -->
+    <ClCompile Include="Source\dependencies\**\*.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <!-- Also disable PCH for any .cppm files, if needed -->
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

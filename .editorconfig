@@ -1,0 +1,15 @@
+root = true
+
+# All files
+[*]
+indent_style = tab
+charset = utf-8
+
+# ReSharper inspection severities
+resharper_cpp_enforce_cv_qualifiers_order_highlighting = suggestion
+resharper_cpp_enforce_cv_qualifiers_placement_highlighting = suggestion
+
+# Xml files
+[*.xml]
+indent_style = tab
+indent_size = 2

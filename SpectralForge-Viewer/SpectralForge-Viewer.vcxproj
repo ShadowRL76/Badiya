@@ -76,16 +76,17 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WINDOWS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;..\SpectralForge-Core\Source\dependencies\include\spdlog;..\SpectralForge-Core\Source\dependencies\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus /utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,7 +100,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WINDOWS;RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;..\SpectralForge-Core\Source\dependencies\include\spdlog;..\SpectralForge-Core\Source\dependencies\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -125,7 +126,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WINDOWS;DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;..\SpectralForge-Core\Source;..\SpectralForge-Core\Source\dependencies\include;..\SpectralForge-Core\Source\dependencies\include\imgui;..\SpectralForge-Core\Source\dependencies\include\imgui\imgui.h;..\SpectralForge-Core\Source\dependencies\include\GL;..\SpectralForge-Core\Source\dependencies\include\GLFW;..\SpectralForge-Core\Source\dependencies\include\glm;..\SpectralForge-Core\Source\dependencies\include\stb;..\SpectralForge-Core\Source\dependencies\include\spdlog;..\SpectralForge-Core\Source\dependencies\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -147,16 +148,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\window\WindowManager.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Source\main\main.cpp" />
-    <ClCompile Include="Source\window\WindowManager.cpp" />
+    <ClCompile Include="Source\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpectralForge-Core\SpectralForge-Core.vcxproj">
       <Project>{8CC1437F-78A5-04D5-E105-FF27CD08EF56}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
