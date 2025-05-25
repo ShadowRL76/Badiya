@@ -1,5 +1,5 @@
 #pragma once
-
+/**/
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -14,7 +14,7 @@
 		auto Model = glm::mat4(1.0f);
 		glm::mat4 MVPOne = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 */
-
+/*
 class Shape {
 private:
 	float angle{};
@@ -77,3 +77,4 @@ public:
 private:
 	void set_shader();
 };
+*/

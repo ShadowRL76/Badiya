@@ -20,6 +20,7 @@ project "SpectralForge-Viewer"
       "../SpectralForge-Core/Source/dependencies/include/GLFW",
       "../SpectralForge-Core/Source/dependencies/include/glm",
       "../SpectralForge-Core/Source/dependencies/include/stb"
+      "../SpectralForge-Core/Source/dependencies/include/spdlog"
    }
 
    links

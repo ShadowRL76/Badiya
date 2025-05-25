@@ -5,7 +5,7 @@
 void ImGuiManager::Init(GLFWwindow* p_window)
 {
 	ImGui::CreateContext();
-	ImGuiIO const& io = ImGui::GetIO(); (void)io;
+	const ImGuiIO &io = ImGui::GetIO(); (void)io;
 	ImGui::GetIO().FontGlobalScale = 3.0f;
 	ImGui_ImplGlfw_InitForOpenGL(p_window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
@@ -43,8 +43,8 @@ void ImGuiManager::RenderUI(const Params& pm)
 		ImGui::SeparatorText("USER GUIDE:");
 		ShowUserGuide();
 	}
-	ShowControlsSection(pm.camera, pm.p_window, pm.SquareOne, pm.SquareTwo, pm.Triangle);
-	DebugTab(pm.camera);
+	ShowControlsSection(*pm.camera, pm.p_window, *pm.SquareOne, *pm.SquareTwo, *pm.Triangle);
+	DebugTab(*pm.camera);
 	ImGui::End();
 
 	ImGui::Render();
@@ -75,8 +75,8 @@ void ImGuiManager::ShowUserGuide()
 	ImGui::Unindent();
 }
 
-void ImGuiManager::ShowControlsSection(const Camera& camera, GLFWwindow* p_window,
-	glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle) 
+void ImGuiManager::ShowControlsSection(Camera& camera, GLFWwindow* p_window,
+	glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle)
 {
 	if (ImGui::CollapsingHeader("Controls"))
 	{
@@ -116,7 +116,7 @@ void ImGuiManager::DebugTab(const Camera& camera)
 		ImGui::Text("OpenGL_Version: %s", p_init->GetOpenGLVersion());
 		ImGui::Text("FPS %f", ImGui::GetIO().Framerate);
 		ImGui::Text("Application average %.3f", 1000.0f / ImGui::GetIO().Framerate);
-		ImGui::Text("Cameras Position %f, %f, %f", camera.m_cameraPos->x, camera.m_cameraPos->y, camera.m_cameraPos->z);
+		ImGui::Text("Cameras Position %f, %f, %f", camera.GetCamerasPos().x, camera.GetCamerasPos().y, camera.GetCamerasPos().z);
 
 		if (ImGui::Button("Disable Skybox Shader"))
 		{

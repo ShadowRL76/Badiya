@@ -141,6 +141,10 @@
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h">
       <Filter>dependencies\include\stb</Filter>
     </ClInclude>
+    <ClInclude Include="Source\window\WindowManager.h" />
+    <ClInclude Include="Source\Camera\CameraController.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp">
@@ -196,6 +200,10 @@
     </ClCompile>
     <ClCompile Include="Source\dependencies\stb.cpp">
       <Filter>dependencies</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\window\WindowManager.cpp" />
+    <ClCompile Include="CameraController.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

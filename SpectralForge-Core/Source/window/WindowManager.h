@@ -38,6 +38,6 @@ public:
 	 * @param share Another window whose OpenGL context to share resources with, or NULL for no sharing.
 	 * @return A unique pointer to the created GLFWwindow, automatically cleaned up when out of scope.
 	 */
-	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>
-		CreateWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> 
+		CreateAppWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 };

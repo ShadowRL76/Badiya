@@ -82,7 +82,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/EHsc /Zc:preprocessor /Zc:__cplusplus /utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Camera\CameraController.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Graphics\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\OpenGLUtils.h" />
@@ -176,8 +177,10 @@
     <ClInclude Include="Source\dependencies\include\imgui\imstb_textedit.h" />
     <ClInclude Include="Source\dependencies\include\imgui\imstb_truetype.h" />
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h" />
+    <ClInclude Include="Source\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\OpenGLUtils.cpp" />
@@ -198,6 +201,7 @@
     <ClCompile Include="Source\dependencies\include\imgui\imgui_tables.cpp" />
     <ClCompile Include="Source\dependencies\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Source\dependencies\stb.cpp" />
+    <ClCompile Include="Source\window\WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\skyback.png" />

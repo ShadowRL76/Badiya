@@ -52,13 +52,13 @@ public:
 	 * @brief Unbinds the index buffer.
 	 * Deactivates the buffer to prevent unintended use.
 	 */
-	void Unbind() const;
+	static void Unbind();
 
 	/**
 	 * @brief Gets the total number of indices stored in the buffer.
 	 * @return The number of indices in the buffer.
 	 */
-	unsigned int GetCount() const { return m_Count; }
+	[[nodiscard]] unsigned int GetCount() const { return m_Count; }
 
 	int GetCubeSize();
 };

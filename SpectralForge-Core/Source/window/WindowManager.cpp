@@ -1,7 +1,9 @@
 #include "WindowManager.h"
 
-std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>
-WindowManager::CreateWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+#include <spdlog/spdlog.h>
+
+std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> 
+WindowManager::CreateAppWindow(const int width, const int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
 	std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> window(
 		glfwCreateWindow(width, height, title, monitor, share),
@@ -10,9 +12,10 @@ WindowManager::CreateWindow(const int width, const int height, const char* title
 
 	if (window == nullptr)
 	{
+		//spdlog::critical("Failed to open GLFW window.{}", window)
 		std::cerr << "Failed to open GLFW window.\n";
 		glfwTerminate();
-		exit(EXIT_FAILURE);
+		quick_exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window.get()); // Initialize GLEW
 

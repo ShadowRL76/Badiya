@@ -1,5 +1,3 @@
-#include "Window/WindowManager.h"
-
 // Third-party libraries
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -7,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <stb/stb_image.h>
+#include <spdlog/spdlog.h>
 
 // SpectralForge-Core headers
 #include "Graphics/Shader.h"
@@ -15,6 +14,7 @@
 #include "ImGui/ImGuiManager.h"
 #include "Graphics/VertexBuffer.h"
 #include "Graphics/IndexBuffer.h"
+#include "Window/WindowManager.h"
 
 // Standard library
 #include <iostream>
@@ -22,16 +22,23 @@
 
 int main()
 {
+
 	OpenGLInit init;
 	ImGuiManager guiManager;
 	WindowManager windowManager(&init);
 
 	auto window =
-		windowManager.CreateWindow(3840, 2160, "Graphics Engine", 
+		windowManager.CreateAppWindow(3840, 2160, "Graphics Engine", 
 			nullptr, nullptr);
+	spdlog::info("Window created: {}x{}", 3840, 2160);
 
-	guiManager.Init(window.get());
-	Camera cam;
+	ImGuiManager::Init(window.get());
+	Camera cam{
+		glm::vec3(2.5f, 2.0f, -15.0f), 
+		glm::vec3(0.0f, 0.0f, 1.0f),  
+		glm::vec3(0.0f, 1.0f, 0.0f),   
+		0.1f                           
+	};
 
 	static constexpr float skyboxVertices[]
 	{
@@ -111,6 +118,7 @@ int main()
 		unsigned char* data = stbi_load(facesCubeMap[i].c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
+			spdlog::info("Loaded texture '{}'", facesCubeMap[i]);
 			stbi_set_flip_vertically_on_load(false);
 			glTexImage2D
 			(
@@ -128,7 +136,7 @@ int main()
 		}
 		else
 		{
-			std::cout << "Cannot Load Textures for cube map: " << facesCubeMap[i] << "\n";
+			spdlog::error("[CubeMap] Failed to load texture '{}', index {}.", facesCubeMap[i], i);
 			stbi_image_free(data);
 		}
 	}
@@ -159,9 +167,9 @@ int main()
 	glm::vec3 translateSquareTwo(6.0f, 0.0f, 0.0f);
 	glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f);
 
-	ImGuiManager::Params pm{ .camera = cam, .p_window = window.get(),
-		.SquareOne = translateSquareOne, .SquareTwo = translateSquareTwo,
-		.Triangle = translateTriangle}; 
+	ImGuiManager::Params pm{ .camera = &cam, .p_window = window.get(),
+		.SquareOne = &translateSquareOne, .SquareTwo = &translateSquareTwo,
+		.Triangle = &translateTriangle}; 
 
 
 
@@ -185,6 +193,9 @@ int main()
 	stbi_image_free(bytes);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	float yRotationAngle = 1.0f;
+
+	spdlog::info("SpectralForge Viewer started");
+
 	do {
 		//Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -207,17 +218,16 @@ int main()
 		// which means no transformation. If you wanted to move or rotate your object, you would modify this matrix.
 		auto Model = glm::mat4(1.0f);
 		Model = translate(Model, translateSquareOne) * rotationMatrix;
-		glm::mat4 MVPOne = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
+		glm::mat4 MVPOne = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 
 		Model = glm::mat4(1.0f);
 		Model = translate(Model, translateSquareTwo) * rotationMatrix;  
-		glm::mat4 MVPThree = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
+		glm::mat4 MVPThree = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 
 		// Get the location of the MVP uniform
 		Model = glm::mat4(1.0f);
 		Model = translate(Model, translateTriangle);
-		glm::mat4 MVPTwo = cam.GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
-
+		glm::mat4 MVPTwo = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 
 		glEnableVertexAttribArray(0); // position
 		glEnableVertexAttribArray(1); // color
@@ -235,7 +245,7 @@ int main()
 
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
 
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), reinterpret_cast<const void*>(3 * sizeof(float)));
 
 			shader1.Activate();
 			glUniform1i(glGetUniformLocation(shader1.ID, "textureSampler"), 0);
@@ -250,6 +260,9 @@ int main()
 
 			glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPThree));
 			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+
+
+
 		}
 
 		glDepthFunc(GL_LEQUAL);
