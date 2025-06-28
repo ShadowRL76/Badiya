@@ -323,6 +323,7 @@
     <ClInclude Include="Source\window\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Camera\CameraController.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />

@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <gtx/quaternion.hpp>
 #include <stb/stb_image.h>
+#include <spdlog/spdlog.h>
 
 
 #include <spdlog/spdlog.h>
