@@ -321,6 +321,7 @@
     <ClInclude Include="Source\Logging.h" />
     <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\window\WindowManager.h" />
+    <ClInclude Include="Source\window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraController.cpp" />
@@ -367,6 +368,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\window\WindowManager.cpp" />
+    <ClCompile Include="Source\window\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <!-- Disable PCH for all .cpp files in Source\dependencies and its subfolders -->
