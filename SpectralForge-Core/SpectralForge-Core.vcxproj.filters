@@ -7,6 +7,18 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{1653CE33-0220-293F-2B39-17E717655ECD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\API">
+      <UniqueIdentifier>{FFD2684A-EB35-F8EE-94BB-30A580FDC371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffers">
+      <UniqueIdentifier>{92C817CE-7EC1-3620-A7F3-1BA5934B162C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{7C6F0F98-E885-0D2E-31FD-984F9D52DEB5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Resources">
+      <UniqueIdentifier>{00CCAA35-ECAF-6B8B-5510-66DE4113560D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
     </Filter>
@@ -64,12 +76,6 @@
     <Filter Include="window">
       <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Logging">
-      <UniqueIdentifier>{ae60e31c-2f2e-4b9f-acdf-9235466260a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Events">
-      <UniqueIdentifier>{a48bd948-2d42-46eb-85db-1c08497c04f6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera\Camera.h">
@@ -78,30 +84,35 @@
     <ClInclude Include="Source\Camera\CameraController.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\IndexBuffer.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Event.h" />
+    <ClInclude Include="Source\Graphics\API\OpenGLUtils.h">
+      <Filter>Graphics\API</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\MeshLoader.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OpenGLUtils.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h">
+      <Filter>Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Renderer.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Renderer\Renderer.h">
+      <Filter>Graphics\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Shader.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Resources\MeshLoader.h">
+      <Filter>Graphics\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Texture.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Resources\Model.h">
+      <Filter>Graphics\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\VertexBuffer.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Source\Graphics\Resources\Shader.h">
+      <Filter>Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Resources\Texture.h">
+      <Filter>Graphics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Source\ImGui\ImGuiManager.h">
       <Filter>ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Logging.h" />
     <ClInclude Include="Source\dependencies\include\GL\eglew.h">
       <Filter>dependencies\include\GL</Filter>
     </ClInclude>
@@ -573,31 +584,12 @@
     <ClInclude Include="Source\dependencies\include\stb\stb_image.h">
       <Filter>dependencies\include\stb</Filter>
     </ClInclude>
+    <ClInclude Include="Source\pch.h" />
     <ClInclude Include="Source\window\WindowManager.h">
       <Filter>window</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Model.h" />
-    <ClInclude Include="Source\pch.h" />
-    <ClInclude Include="Source\Logging.h">
-      <Filter>Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Event.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEvent.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseEvent.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseCodes.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyCodes.h">
-      <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="ApplicationEvent.h">
-      <Filter>Events</Filter>
+    <ClInclude Include="Source\window\WindowsWindow.h">
+      <Filter>window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -607,30 +599,34 @@
     <ClCompile Include="Source\Camera\CameraController.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\IndexBuffer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\API\OpenGLUtils.cpp">
+      <Filter>Graphics\API</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\MeshLoader.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\OpenGLUtils.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Renderer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Renderer\Renderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Shader.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Resources\MeshLoader.cpp">
+      <Filter>Graphics\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Texture.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Resources\Model.cpp">
+      <Filter>Graphics\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\VertexBuffer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Source\Graphics\Resources\Shader.cpp">
+      <Filter>Graphics\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Resources\Texture.cpp">
+      <Filter>Graphics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="Source\ImGui\ImGuiManager.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Logging.cpp" />
     <ClCompile Include="Source\dependencies\include\glm\detail\glm.cpp">
       <Filter>dependencies\include\glm\detail</Filter>
     </ClCompile>
@@ -658,62 +654,12 @@
     <ClCompile Include="Source\dependencies\stb.cpp">
       <Filter>dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\pch.cpp" />
     <ClCompile Include="Source\window\WindowManager.cpp">
       <Filter>window</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Model.cpp" />
-    <ClCompile Include="Source\pch.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\dependencies\**\*.cpp" />
-    <ClCompile Include="Source\Logging.cpp">
-      <Filter>Logging</Filter>
+    <ClCompile Include="Source\window\WindowsWindow.cpp">
+      <Filter>window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

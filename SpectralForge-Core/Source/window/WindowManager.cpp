@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "WindowManager.h"
-#include "WindowWindows.h"
+#include "WindowsWindow.h"
 
-namespace Badiya {
+namespace Badiya::Window {
 
 	//Make a #DEFINE to check if its windows then use this else do other
 	Scope<WindowManager> WindowManager::Create(const WindowProps& props) {
-		return CreateScope<WindowWindows>(props);
+		return CreateScope<WindowsWindow>(props);
 	}
 }
 

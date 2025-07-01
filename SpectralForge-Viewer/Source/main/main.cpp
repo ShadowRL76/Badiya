@@ -14,23 +14,20 @@
 #include <stb/stb_image.h>
 #include <spdlog/spdlog.h>
 
-
-#include <spdlog/spdlog.h>
-
 #include <assimp/scene.h>
 
 
 // SpectralForge-Core headers
-#include "Graphics/Shader.h"
+#include "Graphics/Resources/Shader.h"
 #include "Camera/Camera.h"
-#include "Graphics/OpenGLUtils.h"
+#include "Graphics/API/OpenGLUtils.h"
 #include "ImGui/ImGuiManager.h"
-#include "Graphics/VertexBuffer.h"
-#include "Graphics/IndexBuffer.h"
+#include "Graphics/Buffers/VertexBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
 #include "Window/WindowManager.h"
 
-#include "Graphics/Renderer.h"
-#include "Graphics/Model.h"
+#include "Graphics/Renderer/Renderer.h"
+#include "Graphics/Resources/Model.h"
 
 #include "Logging.h"
 
@@ -44,6 +41,9 @@
 //TODO: Add shader helper functions
 //TODO: Clean Up Mesh and Model as well
 // Shader needs to use Modern CPP and same with Mesh and Model
+
+//TODO: ASAP-> Work on EventCallBackSystem so the window fixes itself on resize and etc etc!!!!!
+
 
 // NOTE FOR CLASS DESIGN:
 //
@@ -71,17 +71,13 @@ namespace Badiya {
 	{
 		OpenGLInit init;
 		ImGuiManager guiManager;
-		WindowManager windowManager(&init);
 		Logging::Init();
 
-		auto window =
-			windowManager.CreateAppWindow(3840, 2160, "Graphics Engine",
-				nullptr, nullptr);
-
+		auto window = Window::WindowManager::Create(Window::WindowProps("Badiya", 1280, 720));
 
 		BDY_CORE_INFO("Window created: {}x{}", 3840, 2160);
 
-		ImGuiManager::Init(window.get());
+		ImGuiManager::Init(static_cast<GLFWwindow*>(window->GetNativeWindow()));
 		Camera cam{
 			glm::vec3(2.5f, 2.0f, -15.0f),
 			glm::vec3(0.0f, 0.0f, 1.0f),
@@ -138,7 +134,7 @@ namespace Badiya {
 		glm::vec3 translateSquareTwo(6.0f, 0.0f, 0.0f);
 		glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f);
 
-		ImGuiManager::Params pm{ .camera = &cam, .p_window = window.get(),
+		ImGuiManager::Params pm{ .camera = &cam, .p_window = static_cast<GLFWwindow*>(window->GetNativeWindow()),
 			.SquareOne = &translateSquareOne, .SquareTwo = &translateSquareTwo,
 			.Triangle = &translateTriangle };
 
@@ -160,11 +156,11 @@ namespace Badiya {
 			// Accept fragment if it closer to the camera than the former one
 			int width, height;
 
-			glfwGetFramebufferSize(window.get(), &width, &height);
+			glfwGetFramebufferSize(static_cast<GLFWwindow*>(window->GetNativeWindow()), &width, &height);
 
 			GLint MatrixIDS = glGetUniformLocation(shader1.ID, "MVP");
 
-			cam.Controls(window.get());
+			cam.Controls(static_cast<GLFWwindow*>(window->GetNativeWindow()));
 
 			float angle = glm::radians(yRotationAngle);
 			glm::vec3 rotationVector(0.0f, 1.0f, 0.0f);
@@ -258,15 +254,15 @@ namespace Badiya {
 			guiManager.RenderUI(pm);
 
 			// Swap buffers
-			glfwSwapBuffers(window.get());
+			glfwSwapBuffers(static_cast<GLFWwindow*>(window->GetNativeWindow()));
 			glfwPollEvents();
 
 			//Enabled so gpu cant render inside the cubes
 			//glEnable(GL_CULL_FACE);
 			//glfwSwapInterval(0); // Disable V-Sync
 		} // Check if the ESC key was pressed or the window was closed
-		while (glfwGetKey(window.get(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-			glfwWindowShouldClose(window.get()) == 0);
+		while (glfwGetKey(static_cast<GLFWwindow*>(window->GetNativeWindow()), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+			glfwWindowShouldClose(static_cast<GLFWwindow*>(window->GetNativeWindow())) == 0);
 		return 0;
 	}
 }

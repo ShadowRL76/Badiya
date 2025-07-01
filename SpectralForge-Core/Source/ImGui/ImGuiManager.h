@@ -2,13 +2,9 @@
 
 #include "pch.h"
 
-#include "Graphics/OpenGLUtils.h"
+#include "Graphics/API/OpenGLUtils.h"
 #include "Camera/Camera.h"
-#include "Graphics/Shader.h"
 
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_glfw.h>
-#include <imgui/imgui_impl_opengl3.h>
 
 namespace Badiya {
 	/**

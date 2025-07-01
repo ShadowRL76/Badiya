@@ -1,7 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
-#include <glm/gtc/matrix_transform.hpp>
 
 namespace Badiya {
 	/**
@@ -30,73 +29,7 @@ namespace Badiya {
 		void Controls(GLFWwindow* p_window);
 
 		Camera(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up, const float speed);
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-	/**
-	 * @brief Handles camera movement based on user input.
-	 * Captures input from the given GLFW window to control the camera's position and orientation.
-	 * @param p_window The GLFW window to capture user input.
-	 */
-	void Controls(GLFWwindow* p_window) const; 
-
+	
 		/**
 		 * @brief Gets the view matrix for the camera.
 		 * The view matrix transforms world coordinates to camera coordinates.

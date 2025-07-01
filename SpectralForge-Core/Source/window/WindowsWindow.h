@@ -2,9 +2,9 @@
 
 #include "WindowManager.h"
 
-namespace Badiya{
+namespace Badiya::Window {
 
-	class WindowsWindow : public WindowManager
+	class WindowsWindow : public WindowManager 
 	{
 	private:
 		struct WindowData
@@ -15,20 +15,21 @@ namespace Badiya{
 		};
 
 		WindowData m_Data;
+		GLFWwindow* m_Window;
+
 	private:
 		virtual void Init(const WindowProps& props);
-		virtual void Shutdown();	
+		virtual void  Shutdown();
 	public:
-		WindowsWindow(const WindowProps& props);
-		virtual ~WindowsWindow() = default;
+		 explicit WindowsWindow(const WindowProps& props);
+		 virtual ~WindowsWindow() override;
 
 		void OnUpdate() override;
 		void SetVSync(bool enabled) override;
-		bool IsVsync() const override { return m_Data.VSync; }
+		[[nodiscard]] bool IsVsync() const override { return m_Data.VSync; }
+		virtual void* GetNativeWindow() const override;
 
-		uint16_t GetWindowWidth() override { return m_Data.width; };
-		uint16_t GetWindowHeight() override { return m_Data.height; };
-
-
+		[[nodiscard]] uint16_t GetWindowWidth() const override { return m_Data.width; }
+		[[nodiscard]] uint16_t GetWindowHeight() const override { return m_Data.height; }
 	};
 }

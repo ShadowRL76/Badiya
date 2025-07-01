@@ -4,7 +4,7 @@
 
 namespace Badiya
 {
-
+	//TODO: Move this to base header
 #define BIT(x) (1 << (x))
 	
 	enum class EventType : std::uint8_t

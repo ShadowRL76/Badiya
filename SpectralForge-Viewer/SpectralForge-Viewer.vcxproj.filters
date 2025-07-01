@@ -4,17 +4,14 @@
     <Filter Include="main">
       <UniqueIdentifier>{6A7F9A7C-56B6-9B0D-FFA2-8110EBB8170F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="window">
-      <UniqueIdentifier>{5DFE1E25-49A0-49FB-325B-5D4F1E9CD04B}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main\main.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="Source\pch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\pch.h" />
   </ItemGroup>
 </Project>
