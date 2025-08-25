@@ -24,6 +24,7 @@ namespace Badiya {
 			glm::vec3* SquareOne;    ///< Translation vector for the first square object.
 			glm::vec3* SquareTwo;    ///< Translation vector for the second square object.
 			glm::vec3* Triangle;     ///< Translation vector for the triangle object.
+			glm::vec3* Model;
 		};
 
 	private:
@@ -44,7 +45,7 @@ namespace Badiya {
 		 * @param Triangle Translation vector for the triangle object.
 		 */
 		void ShowControlsSection(Camera& camera, GLFWwindow* p_window,
-			glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle);
+			glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle, glm::vec3& Model);
 
 		void DebugTab(const Camera& camera);
 

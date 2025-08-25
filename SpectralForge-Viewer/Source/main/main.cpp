@@ -4,7 +4,6 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <print>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
@@ -20,7 +19,6 @@
 // SpectralForge-Core headers
 #include "Graphics/Resources/Shader.h"
 #include "Camera/Camera.h"
-#include "Graphics/API/OpenGLUtils.h"
 #include "ImGui/ImGuiManager.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
@@ -33,8 +31,6 @@
 
 // Standard library
 #include <string>
-
-#include "../../../SpectralForge-Core/ApplicationEvent.h"
 
 
 //TODO: Figure out textures, Clean up Main, and Shader
@@ -69,13 +65,12 @@
 namespace Badiya {
 	int Run() 
 	{
-		OpenGLInit init;
 		ImGuiManager guiManager;
 		Logging::Init();
 
-		auto window = Window::WindowManager::Create(Window::WindowProps("Badiya", 1280, 720));
+		auto window = Window::WindowManager::Create(Window::WindowProps("Badiya", 3840, 2160));
 
-		BDY_CORE_INFO("Window created: {}x{}", 3840, 2160);
+		BDY_CORE_INFO("Window created: {}x{}", window->GetWindowWidth(), window->GetWindowHeight());
 
 		ImGuiManager::Init(static_cast<GLFWwindow*>(window->GetNativeWindow()));
 		Camera cam{
@@ -84,17 +79,15 @@ namespace Badiya {
 			glm::vec3(0.0f, 1.0f, 0.0f),
 			0.1f
 		};
-
-		WindowResizeEvent e(3840, 2160);
-		BDY_TRACE(e.ToString());
+		
 
 
 		GLuint skyboxBuffers[3];
-		Renderer::BindBuffersAndGenBuffers(Renderer::BufferType::Skybox, 1, skyboxBuffers);
+		Render::Renderer::BindBuffersAndGenBuffers(Render::Renderer::BufferType::Skybox, 1, skyboxBuffers);
 
 		stbi_set_flip_vertically_on_load(true);
 
-		//Model model("../SpectralForge-Core/resources/model.obj");
+		Model model("../SpectralForge-Core/resources/model.obj");
 		//Model model1("../SpectralForge-Core/resources/girl.fbx");
 
 		std::string facesCubeMap[6] = {
@@ -106,8 +99,10 @@ namespace Badiya {
 		"../SpectralForge-Core/resources/blueGalaxyBK.png"
 		};
 
-		Renderer::LoadCubeMap(facesCubeMap);
+		Render::Renderer::LoadCubeMap(facesCubeMap);
 
+		//{
+		//Move this to Renderer
 		unsigned int VertexArrayID{};
 		glGenVertexArrays(1, &VertexArrayID);
 
@@ -130,18 +125,23 @@ namespace Badiya {
 			"../SpectralForge-Core/Source/Shaders/skybox.vertexshader",
 			"../SpectralForge-Core/Source/Shaders/skybox.fragmentshader");
 
+		Shader shader3("../SpectralForge-Core/Source/Shaders/ModelVertexShader.vertexshader",
+			"../SpectralForge-Core/Source/Shaders/ModelFragmentShader.fragmentshader");
+
+
+
 		glm::vec3 translateSquareOne(-3.0f, 0.0f, 0.0f);
 		glm::vec3 translateSquareTwo(6.0f, 0.0f, 0.0f);
 		glm::vec3 translateTriangle(2.0f, 0.0f, 0.0f);
+		glm::vec3 translateModel(-6.0f, 0.0f, 0.0f);
 
 		ImGuiManager::Params pm{ .camera = &cam, .p_window = static_cast<GLFWwindow*>(window->GetNativeWindow()),
 			.SquareOne = &translateSquareOne, .SquareTwo = &translateSquareTwo,
-			.Triangle = &translateTriangle };
+			.Triangle = &translateTriangle, .Model = &translateModel };
 
-
+		// }
 		GLuint texture;
-		Renderer::BindBuffersAndGenBuffers(Renderer::BufferType::Object, 1, &texture);
-
+		Render::Renderer::BindBuffersAndGenBuffers(Render::Renderer::BufferType::Object, 1, &texture);
 
 		float yRotationAngle = 1.0f;
 
@@ -175,14 +175,19 @@ namespace Badiya {
 			Model = translate(Model, translateSquareOne) * rotationMat;
 			glm::mat4 MVPOne = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
 
-			Model = glm::mat4(1.0f);
-			Model = translate(Model, translateSquareTwo) * rotationMat;
-			glm::mat4 MVPThree = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
-
 			// Get the location of the MVP uniform
 			Model = glm::mat4(1.0f);
 			Model = translate(Model, translateTriangle) * rotationMat;
 			glm::mat4 MVPTwo = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
+
+			Model = glm::mat4(1.0f);
+			Model = translate(Model, translateSquareTwo) * rotationMat;
+			glm::mat4 MVPThree = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model; // Combine them into the MVP matrix
+
+
+			Model = glm::mat4(1.0f);
+			Model = translate(Model, translateModel) * rotationMat;
+			glm::mat4 MVPFour = Camera::GetProjectionMatrix() * cam.GetViewMatrix() * Model;
 
 			glEnableVertexAttribArray(0); // position
 			glEnableVertexAttribArray(1); // color
@@ -191,7 +196,6 @@ namespace Badiya {
 			{
 				yRotationAngle += 0.50f;
 			}
-
 
 			if (guiManager.shader1Enabled) {
 				vertexBuffer.Bind();
@@ -216,11 +220,17 @@ namespace Badiya {
 
 				glUniformMatrix4fv(MatrixIDS, 1, GL_FALSE, value_ptr(MVPThree));
 				glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+				
+				
+				shader3.Activate();
 
-				//model.Draw(shader1);
+				GLint mvpLoc = glGetUniformLocation(shader3.ID, "MVP");
+				glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, glm::value_ptr(MVPFour));
 
-				//model1.Draw(shader1);
+				GLint colorLoc = glGetUniformLocation(shader3.ID, "uColor");
+				glUniform3f(colorLoc, 1.0f, 0.0f, 0.0f);  
 
+				model.Draw(shader3);
 			}
 			else
 			{
@@ -271,3 +281,4 @@ int main()
 {
 	return Badiya::Run();
 }
+

@@ -591,6 +591,12 @@
     <ClInclude Include="Source\window\WindowsWindow.h">
       <Filter>window</Filter>
     </ClInclude>
+    <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="MouseCodes.h" />
+    <ClInclude Include="KeyEvent.h" />
+    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="Assert.h" />
+    <ClInclude Include="ApplicationEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\Camera.cpp">
@@ -661,5 +667,10 @@
     <ClCompile Include="Source\window\WindowsWindow.cpp">
       <Filter>window</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Build-Core.lua" />
+    <None Include="Source\Shaders\ModelFragmentShader.fragmentshader" />
+    <None Include="Source\Shaders\ModelVertexShader.vertexshader" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 /**/
 
 #include <string>
-namespace Badiya {
+namespace Badiya::Render {
 
 	class Renderer
 	{
@@ -55,6 +55,7 @@ namespace Badiya {
 		unsigned int CreateSkyboxVAO(const float* vertices, size_t vertSize, const unsigned int* indices, size_t idxSize);
 		static unsigned int LoadCubeMap(const std::string faces[6]);
 
+		//Make this a Template
 		void Draw();
 		static void BindBuffersAndGenBuffers(const BufferType type, GLsizei n, GLuint* arrays);
 

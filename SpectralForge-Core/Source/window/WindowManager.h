@@ -23,8 +23,8 @@ namespace Badiya::Window {
 		uint16_t height;
 
 		explicit WindowProps(std::string title = "Badiya Engine",
-			const uint16_t width = 1600,
-			const uint16_t height = 900)
+			const uint16_t width = {},
+			const uint16_t height = {})
 			:title(std::move(title)), width(width), height(height)
 		{
 		}
@@ -35,6 +35,9 @@ namespace Badiya::Window {
 	protected:
 		WindowProps m_Data;
 	public:
+
+		using EventCallbackFn = std::function<void(Event&)>;
+
 		WindowManager() = default;
 		virtual ~WindowManager() = default;
 
@@ -44,6 +47,7 @@ namespace Badiya::Window {
 
 
 		virtual void OnUpdate() = 0;
+
 		virtual void SetVSync(bool enabled) = 0;
 		[[nodiscard]] virtual bool IsVsync() const = 0;
 		[[nodiscard]] virtual void* GetNativeWindow() const = 0;

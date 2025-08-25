@@ -142,6 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationEvent.h" />
+    <ClInclude Include="Assert.h" />
+    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="KeyEvent.h" />
+    <ClInclude Include="MouseCodes.h" />
+    <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Camera\CameraController.h" />
     <ClInclude Include="Source\Event.h" />
@@ -341,6 +347,11 @@
     <ClCompile Include="Source\pch.cpp" />
     <ClCompile Include="Source\window\WindowManager.cpp" />
     <ClCompile Include="Source\window\WindowsWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Build-Core.lua" />
+    <None Include="Source\Shaders\ModelFragmentShader.fragmentshader" />
+    <None Include="Source\Shaders\ModelVertexShader.vertexshader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

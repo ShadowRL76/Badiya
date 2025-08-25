@@ -2,8 +2,11 @@
 #include "pch.h"
 #include "Renderer.h"
 
+//TODO: Adding Logging properly
+//TODO: Fix image size problem
 
-namespace Badiya {
+
+namespace Badiya::Render {
 
 	Renderer::Renderer(const float* vertices, size_t vertSize, const unsigned int* indices, size_t idxSize)
 	{
@@ -38,11 +41,11 @@ namespace Badiya {
 		else if (type == BufferType::Object)
 		{
 
-			unsigned char* bytes = stbi_load("../SpectralForge-Core/resources/dylan.jpg",
+			unsigned char* bytes = stbi_load("../SpectralForge-Core/resources/IMG_6525.jpg",
 				&m_widthImg, &m_heightImg, &m_numColCh, 0);
 
 			if (!bytes) {
-				spdlog::error("Failed to load image: ../SpectralForge-Core/resources/dylan.jpg");
+				spdlog::error("Failed to load image: ../SpectralForge-Core/resources/IMG_6525.jpg");
 				return;
 			}
 

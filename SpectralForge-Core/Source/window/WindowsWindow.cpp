@@ -39,6 +39,7 @@ namespace Badiya::Window {
 
 	}
 
+
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();

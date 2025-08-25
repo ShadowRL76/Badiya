@@ -48,7 +48,7 @@ namespace Badiya {
 			ImGui::SeparatorText("USER GUIDE:");
 			ShowUserGuide();
 		}
-		ShowControlsSection(*pm.camera, pm.p_window, *pm.SquareOne, *pm.SquareTwo, *pm.Triangle);
+		ShowControlsSection(*pm.camera, pm.p_window, *pm.SquareOne, *pm.SquareTwo, *pm.Triangle, *pm.Model);
 		DebugTab(*pm.camera);
 		ImGui::End();
 
@@ -81,18 +81,20 @@ namespace Badiya {
 	}
 
 	void ImGuiManager::ShowControlsSection(Camera& camera, GLFWwindow* p_window,
-		glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle)
+		glm::vec3& SquareOne, glm::vec3& SquareTwo, glm::vec3& Triangle, glm::vec3& Model)
 	{
 		if (ImGui::CollapsingHeader("Controls"))
 		{
 			ImGui::SliderFloat3("Translate Square One", value_ptr(SquareOne), -20.0f, 20.0f);
 			ImGui::SliderFloat3("Translate Square Two", value_ptr(SquareTwo), -20.0f, 20.0f);
 			ImGui::SliderFloat3("Translate Triangle", value_ptr(Triangle), -20.0f, 20.0f);
+			ImGui::SliderFloat3("Translate Model", value_ptr(Model), -20.0f, 20.0f);
 			if (ImGui::Button("Reset"))
 			{
 				SquareOne = glm::vec3(-3.0f, 0.0f, 0.0f);
 				SquareTwo = glm::vec3(6.0f, 0.0f, 0.0f);
 				Triangle = glm::vec3(2.0f, 0.0f, 0.0f);
+				Model = glm::vec3(-6.0f, 0.0f, 0.0f);
 
 				CubeRotationEnabled = false;
 				camera.CameraReset(p_window);
@@ -103,6 +105,9 @@ namespace Badiya {
 			}
 
 			if (ImGui::Button("Add Square"))
+			{
+			}
+			if (ImGui::Button("Switch Camera"))
 			{
 			}
 			if (ImGui::Button("Close Me"))

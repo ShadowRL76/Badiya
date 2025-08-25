@@ -12,6 +12,8 @@ namespace Badiya::Window {
 			std::string title;
 			uint16_t width, height;
 			bool VSync;
+
+			EventCallbackFn EventCallback;
 		};
 
 		WindowData m_Data;
