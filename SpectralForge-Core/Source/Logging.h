@@ -34,11 +34,11 @@ namespace Badiya {
 #define BDY_CORE_INFO(...)  Badiya::Logging::GetCoreLogger()->info(__VA_ARGS__)
 #define BDY_CORE_WARN(...)  Badiya::Logging::GetCoreLogger()->warn(__VA_ARGS__)
 #define BDY_CORE_ERROR(...) Badiya::Logging::GetCoreLogger()->error(__VA_ARGS__)
-#define BDY_CORE_FATAL(...) Badiya::Logging::GetCoreLogger()->fatal(__VA_ARGS__)
+#define BDY_CORE_CRITICAL(...) Badiya::Logging::GetCoreLogger()->fatal(__VA_ARGS__)
 //Client Log Macros
 #define BDY_TRACE(...) Badiya::Logging::GetViewerLogger()->trace(__VA_ARGS__)
 #define BDY_INFO(...)  Badiya::Logging::GetViewerLogger()->info(__VA_ARGS__)
 #define BDY_WARN(...)  Badiya::Logging::GetViewerLogger()->warn(__VA_ARGS__)
 #define BDY_ERROR(...) Badiya::Logging::GetViewerLogger()->error(__VA_ARGS__)
-#define BDY_FATAL(...) Badiya::Logging::GetViewerLogger()->fatal(__VA_ARGS__)
+#define BDY_CRITICAL(...) Badiya::Logging::GetViewerLogger()->fatal(__VA_ARGS__)
 #endif

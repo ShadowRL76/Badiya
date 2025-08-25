@@ -97,7 +97,7 @@ namespace Badiya {
 				Model = glm::vec3(-6.0f, 0.0f, 0.0f);
 
 				CubeRotationEnabled = false;
-				camera.CameraReset(p_window);
+				camera.CameraReset();
 			}
 			if (ImGui::Button("Rotate Cubes 360"))
 			{

@@ -1,6 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
+#include "CameraController.h"
+
 
 namespace Badiya {
 	/**
@@ -8,7 +10,7 @@ namespace Badiya {
 	 * @brief Manages the camera's position, orientation, and movement in a 3D scene.
 	 */
 	class Camera {
-	public:
+	private:
 		// The camera's position in 3D space.
 		glm::vec3 m_cameraPos{};
 
@@ -20,6 +22,8 @@ namespace Badiya {
 
 		// The camera's movement speed.
 		float m_cameraSpeed{};
+
+		CameraController m_controller;
 	public:
 		/**
 		 * @brief Handles camera movement based on user input.
@@ -28,8 +32,10 @@ namespace Badiya {
 		 */
 		void Controls(GLFWwindow* p_window);
 
-		Camera(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up, const float speed);
-	
+		Camera(const glm::vec3& position, const glm::vec3& front,
+			const glm::vec3& up, float speed);
+
+		friend class CameraController;
 		/**
 		 * @brief Gets the view matrix for the camera.
 		 * The view matrix transforms world coordinates to camera coordinates.
@@ -50,7 +56,7 @@ namespace Badiya {
 		 * Useful for returning the camera to its starting state.
 		 * @param p_window The GLFW window (used for method calls but not directly in this function).
 		 */
-		void CameraReset(GLFWwindow* p_window);
+		void CameraReset();
 
 		[[nodiscard]] const glm::vec3& GetCamerasPos() const { return m_cameraPos; }
 	};

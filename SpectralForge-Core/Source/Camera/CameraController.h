@@ -1,24 +1,22 @@
 #pragma once
 
-#include "Camera.h"
 
 namespace Badiya {
+	class Camera;
+
 class CameraController
 {
 private:
-	 Camera& m_camera;
+	Camera& m_camera;
 public:
-	float m_cameraSpeed{};
-	glm::vec3 m_cameraPos{};
-public:
-	explicit CameraController(Camera& camera) : m_camera(camera) {}
+	explicit CameraController(Camera& camera);
 
-	[[nodiscard]] glm::vec3 MoveForward(const float speed) const;
-		[[nodiscard]] glm::vec3 MoveLeft(const float speed) const;
-		[[nodiscard]] glm::vec3 MoveRight(const float speed) const;
-	[[nodiscard]] glm::vec3 MoveBackwards(const float speed) const;
-	[[nodiscard]] glm::vec3 MoveUp(const float Position) const;
-	[[nodiscard]] glm::vec3 MoveDown(const float Position) const;
+	glm::vec3 MoveForward(const float speed);
+	glm::vec3 MoveLeft(const float speed);
+	glm::vec3 MoveRight(const float speed);
+	glm::vec3 MoveBackwards(const float speed);
+	glm::vec3 MoveUp(const float Position);
+	glm::vec3 MoveDown(const float Position);
 
 };
 }

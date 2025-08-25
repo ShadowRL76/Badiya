@@ -26,11 +26,11 @@ namespace Badiya {
 		}
 
 
-		uint32_t GetWidth() const { return m_width; }
-		uint32_t GetHeight() const { return m_height; }
+		[[nodiscard]] uint32_t GetWidth() const { return m_width; }
+		[[nodiscard]] uint32_t GetHeight() const { return m_height; }
 
-		int GetChannels() const { return m_channels; }
+		[[nodiscard]] int GetChannels() const { return m_channels; }
 
-		uint8_t* GetPixels() const { return m_pixels; }
+		[[nodiscard]] uint8_t* GetPixels() const { return m_pixels; }
 	};
 }

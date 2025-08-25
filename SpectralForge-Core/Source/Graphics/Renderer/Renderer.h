@@ -8,7 +8,7 @@ namespace Badiya::Render {
 	{
 
 	public:
-		unsigned int* m_skyboxVAO{}, m_skyboxVBO{}, m_skyboxEBO{};
+		unsigned int m_skyboxVAO{}, m_skyboxVBO{}, m_skyboxEBO{};
 		unsigned int m_TextureID{};
 		static unsigned int m_textureID;
 		static int m_widthImg, m_heightImg, m_numColCh;

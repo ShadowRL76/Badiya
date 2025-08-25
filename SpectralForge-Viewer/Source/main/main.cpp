@@ -37,7 +37,7 @@
 //TODO: Add shader helper functions
 //TODO: Clean Up Mesh and Model as well
 // Shader needs to use Modern CPP and same with Mesh and Model
-
+//TODO: Add debug console inside imgui instead of console.
 //TODO: ASAP-> Work on EventCallBackSystem so the window fixes itself on resize and etc etc!!!!!
 
 

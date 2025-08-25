@@ -2,7 +2,7 @@
 
 namespace Badiya
 {
-	using KeyCode = uint8_t;
+	using KeyCode = uint16_t;
 
 	namespace Key
 	{

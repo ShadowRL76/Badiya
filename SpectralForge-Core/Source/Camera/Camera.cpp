@@ -2,40 +2,39 @@
 #include "Camera.h"
 
 #include "GLFW/glfw3.h"
-
 #include "CameraController.h"
 
 namespace Badiya {
-	Camera::Camera(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up, const float speed)
+	Camera::Camera(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up, float speed)
 		: m_cameraPos(position),
 		m_cameraFront(front),
 		m_cameraUp(up),
-		m_cameraSpeed(speed)
+		m_cameraSpeed(speed),
+		m_controller(*this)
 	{
 	}
 
 	void Camera::Controls(GLFWwindow* p_window)
 	{
-		const CameraController controller(*this);
 
 		if (glfwGetKey(p_window, GLFW_KEY_W) == GLFW_PRESS)
-			(void)controller.MoveForward(m_cameraSpeed);
+			m_controller.MoveForward(m_cameraSpeed);
 
 		if (glfwGetKey(p_window, GLFW_KEY_S) == GLFW_PRESS)
-			(void)controller.MoveBackwards(m_cameraSpeed);
+			m_controller.MoveBackwards(m_cameraSpeed);
 
 		if (glfwGetKey(p_window, GLFW_KEY_A) == GLFW_PRESS)
-			(void)controller.MoveLeft(m_cameraSpeed);
+			m_controller.MoveLeft(m_cameraSpeed);
 
 		if (glfwGetKey(p_window, GLFW_KEY_D) == GLFW_PRESS)
-			(void)controller.MoveRight(m_cameraSpeed);
+			m_controller.MoveRight(m_cameraSpeed);
 
 
 		if (glfwGetKey(p_window, GLFW_KEY_SPACE) == GLFW_PRESS)
-			(void)controller.MoveUp(0.25f);
+			m_controller.MoveUp(0.25f);
 
 		if (glfwGetKey(p_window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-			(void)controller.MoveDown(0.25f);
+			m_controller.MoveDown(0.25f);
 
 		if (glfwGetKey(p_window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
 			m_cameraFront.y += 0.05f;
@@ -43,11 +42,11 @@ namespace Badiya {
 			m_cameraFront.y -= 0.05f;
 
 		if (glfwGetKey(p_window, GLFW_KEY_R) == GLFW_PRESS)
-			CameraReset(p_window);
+			CameraReset();
 	}
 
 
-	void Camera::CameraReset(GLFWwindow* p_window)
+	void Camera::CameraReset()
 	{
 		m_cameraPos.x = 2.5f; m_cameraPos.y = 2.0f; m_cameraPos.z = -15.0f;
 		m_cameraFront.x = 0.0f; m_cameraFront.y = 0.0f; m_cameraFront.z = 1.0f;
